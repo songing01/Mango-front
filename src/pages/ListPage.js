@@ -1,5 +1,10 @@
+import RestaurantList from "../components/List/RestaurantList";
 const ListPage = () => {
-  return <div>리스트 페이지</div>;
+  return (
+    <div>
+      <RestaurantList />
+    </div>
+  );
 };
 
 export default ListPage;
