@@ -1,0 +1,8 @@
+{
+  "git.autofetch": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "open-in-browser.default": "Chrome",
+  "explorer.confirmDelete": false,
+  "security.workspace.trust.untrustedFiles": "open"
+}
