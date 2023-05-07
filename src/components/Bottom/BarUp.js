@@ -6,7 +6,7 @@ const BarUp = ({ isMain }) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   return (
-    <ScrollUpButton isMain={isMain || true} onClick={moveToTop}>
+    <ScrollUpButton isMain={isMain || false} onClick={moveToTop}>
       <Up />
     </ScrollUpButton>
   );
