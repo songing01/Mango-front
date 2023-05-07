@@ -2,10 +2,14 @@ import styled from "styled-components";
 import { ReactComponent as DibsT } from "../../assets/heartfill_vector.svg";
 import { ReactComponent as DibsF } from "../../assets/heart_vector.svg";
 import { ReactComponent as Star } from "../../assets/star_vector.svg";
-const Restaurant = ({ restaurant }) => {
-  const { image, title, location, recommendation, avgPrice, dibs, rating } =
+const Restaurant = ({ mapId, restaurant, data, setData }) => {
+  const { id, image, title, location, recommendation, avgPrice, dibs, rating } =
     restaurant;
-  const toggleDibs = () => {};
+  const toggleDibs = () => {
+    setData(
+      data.map(item => (item.id === id ? { ...item, dibs: !dibs } : item)),
+    );
+  };
   return (
     <div>
       <RestaurantBlock>

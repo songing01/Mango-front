@@ -1,12 +1,20 @@
 import styled from "styled-components";
 import Restaurant from "./Restaurant";
 
-const RestaurantList = ({ data }) => {
+const RestaurantList = ({ data, setData }) => {
   return (
     <ListBlock>
-      {data.map(restaurant => {
-        return <Restaurant restaurant={restaurant} />;
-      })}
+      {data &&
+        data.map(restaurant => {
+          return (
+            <Restaurant
+              id={restaurant.id}
+              restaurant={restaurant}
+              data={data}
+              setData={setData}
+            />
+          );
+        })}
     </ListBlock>
   );
 };

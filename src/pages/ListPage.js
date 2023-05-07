@@ -9,6 +9,7 @@ const ListPage = () => {
   //처음엔 전체 데이터 보여주기
   const [data, setData] = useState([
     {
+      id: 1,
       image:
         "https://lh3.googleusercontent.com/p/AF1QipNLW-Hz9RV16lviOVvInbfOaK2j568i5MeLSAOS=s1360-w1360-h1020",
       title: "모미지 식당",
@@ -19,6 +20,7 @@ const ListPage = () => {
       rating: 4.5,
     },
     {
+      id: 2,
       image:
         "https://lh3.googleusercontent.com/p/AF1QipPdd7dtJ_KrGlanM5drUOWG71RbJW1-WdTcH4tS=s1360-w1360-h1020",
       title: "사장님 돈까스",
@@ -29,6 +31,7 @@ const ListPage = () => {
       rating: 4.3,
     },
     {
+      id: 3,
       image: undefined,
       title: "사장님 돈까스",
       location: "신촌",
@@ -47,6 +50,7 @@ const ListPage = () => {
       //임시데이터 - 검색된 데이터
       setData([
         {
+          id: 4,
           image:
             "https://lh3.googleusercontent.com/p/AF1QipNLW-Hz9RV16lviOVvInbfOaK2j568i5MeLSAOS=s1360-w1360-h1020",
           title: "검색된 식당",
@@ -57,6 +61,7 @@ const ListPage = () => {
           rating: 4.5,
         },
         {
+          id: 5,
           image:
             "https://lh3.googleusercontent.com/p/AF1QipPdd7dtJ_KrGlanM5drUOWG71RbJW1-WdTcH4tS=s1360-w1360-h1020",
           title: "검색된 식당2",
@@ -79,7 +84,7 @@ const ListPage = () => {
       >
         <SearchBox keyword={keyword} setKeyword={setKeyword} />
       </SearchForm>
-      <RestaurantList data={data} />
+      <RestaurantList data={data} setData={setData} />
     </div>
   );
 };
