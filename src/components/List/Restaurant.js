@@ -7,6 +7,7 @@ const Restaurant = ({ restaurant, data, setData }) => {
     restaurant;
   const toggleDibs = () => {
     setData(
+      //데이터 업데이트 요청 보내기(PUT & GET해서 setData)... (이후 수정)
       data.map(item => (item.id === id ? { ...item, dibs: !dibs } : item)),
     );
   };
