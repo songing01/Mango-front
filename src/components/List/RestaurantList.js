@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import Restaurant from "./Restaurant";
 
 const RestaurantList = () => {
@@ -34,11 +35,15 @@ const RestaurantList = () => {
   ];
 
   return (
-    <div>
+    <ListBlock>
       {data.map(restaurant => {
         return <Restaurant restaurant={restaurant} />;
       })}
-    </div>
+    </ListBlock>
   );
 };
 export default RestaurantList;
+
+const ListBlock = styled.div`
+  margin: 16px;
+`;
