@@ -4,7 +4,10 @@ import SearchBox from "../components/List/SearchBox";
 import { useState, useEffect } from "react";
 
 const ListPage = () => {
+  //보여줄 가게 데이터
   const [data, setData] = useState([]);
+  //멤버별 찜한 가게 데이터
+  const [dibsData, setDibsData] = useState([]);
   //검색어
   const [keyword, setKeyword] = useState("");
   /* useEffect(() => {
@@ -13,6 +16,7 @@ const ListPage = () => {
       .then(data => setData(data));
   }, []); */
 
+  //지역별 가게 리스트 조회
   useEffect(() => {
     setData([
       {
@@ -39,8 +43,61 @@ const ListPage = () => {
         ],
       },
     ]);
+    setDibsData([
+      {
+        storeId: 1,
+        name: "이펍떡볶이",
+        address: "신촌",
+        phone: "0211111111",
+        isParking: 1,
+        operationHours: "8:00-20:00",
+        imageUrl: "https://efub/?img=14",
+        recommendation: "오리지널 떡볶이",
+        averagePrice: 6000,
+        star_average: 5,
+        starCount: "20, 0, 0, 0, 0",
+      },
+      {
+        storeId: 2,
+        name: "이펍호떡",
+        address: "신촌",
+        phone: "0211111111",
+        isParking: 0,
+        operationHours: "8:00-18:00",
+        imageUrl: "https://efub/?img=10",
+        recommendation: "씨앗호떡",
+        averagePrice: 6000,
+        star_average: 5,
+        starCount: "20, 0, 0, 0, 0",
+      },
+      {
+        storeId: 3,
+        name: "이펍빙수",
+        address: "강남",
+        phone: "0211111111",
+        isParking: 0,
+        operationHours: "11:00-22:00",
+        imageUrl: "https://efub/?img=12",
+        recommendation: "팥빙수",
+        averagePrice: 9000,
+        star_average: 5,
+        starCount: "20, 0, 0, 0, 0",
+      },
+      {
+        storeId: 4,
+        name: "까이식당",
+        address: "신촌",
+        phone: "0211111111",
+        isParking: 0,
+        operationHours: "11:00-22:00",
+        imageUrl: "https://efub/?img=12",
+        recommendation: "팥빙수",
+        averagePrice: 9000,
+        star_average: 5,
+        starCount: "20, 0, 0, 0, 0",
+      },
+    ]);
   }, []);
-  //지역별 가게 리스트 조회
 
   const getSearchedData = (keyword, e) => {
     e.preventDefault();
@@ -80,7 +137,13 @@ const ListPage = () => {
         <SearchBox keyword={keyword} setKeyword={setKeyword} />
       </SearchForm>
       {data[0] && data[0].stores && (
-        <StoreList stores={data[0].stores} data={data} setData={setData} />
+        <StoreList
+          stores={data[0].stores}
+          data={data}
+          setData={setData}
+          dibsData={dibsData}
+          setDibsData={setDibsData}
+        />
       )}
     </div>
   );

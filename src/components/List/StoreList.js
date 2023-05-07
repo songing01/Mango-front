@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Store from "./Store";
 
-const StoreList = ({ stores, data, setData }) => {
+const StoreList = ({ stores, data, setData, dibsData, setDibsData }) => {
   return (
     <ListBlock>
       {stores &&
@@ -9,6 +9,7 @@ const StoreList = ({ stores, data, setData }) => {
           return (
             <Store
               key={store.Id}
+              Id={store.Id}
               name={store.name}
               address={store.address}
               imageUrl={store.imageUrl}
@@ -17,6 +18,8 @@ const StoreList = ({ stores, data, setData }) => {
               starAverage={store.starAverage}
               data={data}
               setData={setData}
+              dibsData={dibsData}
+              setDibsData={setDibsData}
             />
           );
         })}

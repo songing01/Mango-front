@@ -2,8 +2,10 @@ import styled from "styled-components";
 import { ReactComponent as DibsT } from "../../assets/heartfill_vector.svg";
 import { ReactComponent as DibsF } from "../../assets/heart_vector.svg";
 import { ReactComponent as Star } from "../../assets/star_vector.svg";
+import { useEffect, useState } from "react";
 
 const Store = ({
+  Id,
   name,
   address,
   imageUrl,
@@ -12,7 +14,17 @@ const Store = ({
   starAverage,
   data,
   setData,
+  dibsData,
+  setDibsData,
 }) => {
+  const [dibs, setDibs] = useState(false);
+  useEffect(() => {
+    dibsData &&
+      dibsData.map(data =>
+        data.name === name ? setDibs(true) : setDibs(false),
+      );
+  }, []);
+
   /*
   const toggleDibs = () => {
     setData(
@@ -20,7 +32,7 @@ const Store = ({
       data.map(item => (item.Id === Id ? { ...item, dibs: !dibs } : item)),
     );
   };*/
-  const dibs = false;
+
   return (
     <div>
       <RestaurantBlock>
