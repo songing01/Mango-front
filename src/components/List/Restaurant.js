@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { ReactComponent as DibsT } from "../../assets/heartfill_vector.svg";
 import { ReactComponent as DibsF } from "../../assets/heart_vector.svg";
 import { ReactComponent as Star } from "../../assets/star_vector.svg";
-const Restaurant = ({ mapId, restaurant, data, setData }) => {
+const Restaurant = ({ restaurant, data, setData }) => {
   const { id, image, title, location, recommendation, avgPrice, dibs, rating } =
     restaurant;
   const toggleDibs = () => {

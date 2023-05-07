@@ -8,7 +8,7 @@ const RestaurantList = ({ data, setData }) => {
         data.map(restaurant => {
           return (
             <Restaurant
-              id={restaurant.id}
+              key={restaurant.id}
               restaurant={restaurant}
               data={data}
               setData={setData}
