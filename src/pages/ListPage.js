@@ -1,79 +1,74 @@
 import styled from "styled-components";
-import RestaurantList from "../components/List/RestaurantList";
+import StoreList from "../components/List/StoreList";
 import SearchBox from "../components/List/SearchBox";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const ListPage = () => {
+  const [data, setData] = useState([]);
   //검색어
   const [keyword, setKeyword] = useState("");
-  //처음엔 전체 데이터 보여주기
-  const [data, setData] = useState([
-    {
-      id: 1,
-      image:
-        "https://lh3.googleusercontent.com/p/AF1QipNLW-Hz9RV16lviOVvInbfOaK2j568i5MeLSAOS=s1360-w1360-h1020",
-      title: "모미지 식당",
-      location: "신촌",
-      recommendation: "소고기 가지 덮밥",
-      avgPrice: "10000원",
-      dibs: true,
-      rating: 4.5,
-    },
-    {
-      id: 2,
-      image:
-        "https://lh3.googleusercontent.com/p/AF1QipPdd7dtJ_KrGlanM5drUOWG71RbJW1-WdTcH4tS=s1360-w1360-h1020",
-      title: "사장님 돈까스",
-      location: "신촌",
-      recommendation: "치즈돈까스",
-      avgPrice: "12000원",
-      dibs: false,
-      rating: 4.3,
-    },
-    {
-      id: 3,
-      image: undefined,
-      title: "사장님 돈까스",
-      location: "신촌",
-      recommendation: "치즈돈까스",
-      avgPrice: "12000원",
-      dibs: false,
-      rating: 4.3,
-    },
-  ]);
+  /* useEffect(() => {
+    fetch("http://localhost:8080/stores?location=%EC%8B%A0%EC%B4%8C")
+      .then(res => res.json())
+      .then(data => setData(data));
+  }, []); */
+
+  useEffect(() => {
+    setData([
+      {
+        location: "신촌",
+        stores: [
+          {
+            Id: 7,
+            name: "유야케도쿄",
+            address: "신촌",
+            imageUrl: "https://efub/?img=11",
+            recommendation: "치즈돈가스",
+            averagePrice: 10000,
+            starAverage: 5,
+          },
+          {
+            Id: 8,
+            name: "한끼마끼",
+            address: "신촌",
+            imageUrl: "https://efub/?img=1",
+            recommendation: "우동",
+            averagePrice: 4000,
+            starAverage: 5,
+          },
+        ],
+      },
+    ]);
+  }, []);
+  //지역별 가게 리스트 조회
 
   const getSearchedData = (keyword, e) => {
     e.preventDefault();
     if (keyword) {
       console.log(keyword);
       //키워드 넣어서 데이터 요첨 & get한 데이터 setData로 저장
-      //임시데이터 - 검색된 데이터
+      //가게 이름 검색
       setData([
         {
-          id: 4,
-          image:
-            "https://lh3.googleusercontent.com/p/AF1QipNLW-Hz9RV16lviOVvInbfOaK2j568i5MeLSAOS=s1360-w1360-h1020",
-          title: "검색된 식당",
-          location: "신촌",
-          recommendation: "소고기 가지 덮밥",
-          avgPrice: "10000원",
-          dibs: true,
-          rating: 4.5,
-        },
-        {
-          id: 5,
-          image:
-            "https://lh3.googleusercontent.com/p/AF1QipPdd7dtJ_KrGlanM5drUOWG71RbJW1-WdTcH4tS=s1360-w1360-h1020",
-          title: "검색된 식당2",
-          location: "신촌",
-          recommendation: "치즈돈까스",
-          avgPrice: "12000원",
-          dibs: false,
-          rating: 4.3,
+          stores: [
+            {
+              Id: 3,
+              name: "까이식당",
+              address: "신촌",
+              phone: "0211111111",
+              isParking: 1,
+              operationHours: "8:00-20:00",
+              imageUrl: "https://efub/?img=14",
+              recommendation: "오리지널 떡볶이",
+              averagePrice: 6000,
+              starAverage: 5,
+            },
+          ],
         },
       ]);
     }
   };
+
   //Search관련 함수랑 Form 다 컴포넌트로 분리하려했는데.. contextAPI, 리덕스 안쓰려면 이 방법밖에 떠오르지 않아요....
   return (
     <div>
@@ -84,11 +79,12 @@ const ListPage = () => {
       >
         <SearchBox keyword={keyword} setKeyword={setKeyword} />
       </SearchForm>
-      <RestaurantList data={data} setData={setData} />
+      {data[0] && data[0].stores && (
+        <StoreList stores={data[0].stores} data={data} setData={setData} />
+      )}
     </div>
   );
 };
 
-export default ListPage;
-
 const SearchForm = styled.form``;
+export default ListPage;
