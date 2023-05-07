@@ -23,15 +23,16 @@ const Store = ({
       dibsData.map(data =>
         data.name === name ? setDibs(true) : setDibs(false),
       );
-  }, []);
+  }, []); //토글기능 구현시, 빈 배열대신 dibsData 넣기
 
-  /*
   const toggleDibs = () => {
-    setData(
-      //데이터 업데이트 요청 보내기(PUT & GET해서 setData)... (이후 수정)
-      data.map(item => (item.Id === Id ? { ...item, dibs: !dibs } : item)),
-    );
-  };*/
+    //찜하기
+    //curl --location --request POST 'http://localhost:8080/hearts/1' \
+    //--header 'token: abcdef123456'
+    //찜취소
+    //curl --location --request DELETE 'http://localhost:8080/hearts/1' \
+    //--header 'token: abcdef123456'
+  };
 
   return (
     <div>
@@ -45,9 +46,9 @@ const Store = ({
         </Info>
         <Icons>
           {dibs ? (
-            <DibsT width={"20px"} height={"18px"} />
+            <DibsT onClick={toggleDibs} width={"20px"} height={"18px"} />
           ) : (
-            <DibsF width={"20px"} height={"18px"} />
+            <DibsF onClick={toggleDibs} width={"20px"} height={"18px"} />
           )}
 
           <Rating>
