@@ -1,23 +1,30 @@
 import styled from "styled-components";
-import { ReactComponent as Dibs } from "../../assets/heart_vector.svg";
+import { ReactComponent as DibsT } from "../../assets/heartfill_vector.svg";
+import { ReactComponent as DibsF } from "../../assets/heart_vector.svg";
 import { ReactComponent as Star } from "../../assets/star_vector.svg";
 const Restaurant = ({ restaurant }) => {
+  const { image, title, location, recommendation, avgPrice, dibs, rating } =
+    restaurant;
+  const toggleDibs = () => {};
   return (
     <div>
       <RestaurantBlock>
-        <Image src={restaurant.image}></Image>
+        <Image src={image}></Image>
         <Info>
-          <Title>{restaurant.title}</Title>
-          <Location>{restaurant.location}</Location>
-
-          <Recommendation>{restaurant.recommendation}</Recommendation>
-          <AvgPrice>{restaurant.avgPrice}</AvgPrice>
+          <Title>{title}</Title>
+          <Location>{location}</Location>
+          <Recommendation>{recommendation}</Recommendation>
+          <AvgPrice>{avgPrice}</AvgPrice>
         </Info>
         <Icons>
-          <Dibs width={"20px"} height={"18px"} />
+          {dibs ? (
+            <DibsT onClick={toggleDibs} width={"20px"} height={"18px"} />
+          ) : (
+            <DibsF onClick={toggleDibs} width={"20px"} height={"18px"} />
+          )}
           <Rating>
             <Star />
-            {restaurant.rating}
+            {rating}
           </Rating>
         </Icons>
       </RestaurantBlock>
@@ -111,6 +118,7 @@ const Recommendation = styled.div`
 const AvgPrice = styled.div`
   padding-top: 8px;
 `;
+
 const Rating = styled.div`
   width: 20px;
   height: 34px;
