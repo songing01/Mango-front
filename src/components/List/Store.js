@@ -71,6 +71,16 @@ const StoreBlock = styled.div`
   border-radius: 32px;
   display: flex;
   margin-bottom: 16px;
+
+  &:active {
+    background: #fff2de;
+  }
+
+  //hover일때는 컬러 적용아닌거 맞는지... 디자인에 여쭤보기...
+  /*
+  &:hover {
+    background: #fff2de;
+  }*/
 `;
 const Image = styled.img`
   width: 92px;
