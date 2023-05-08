@@ -32,6 +32,7 @@ const Store = ({
     //찜취소
     //curl --location --request DELETE 'http://localhost:8080/hearts/1' \
     //--header 'token: abcdef123456'
+    setDibs(!dibs);
   };
 
   return (
