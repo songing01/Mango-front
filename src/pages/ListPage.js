@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import StoreList from "../components/List/StoreList";
 import SearchBox from "../components/List/SearchBox";
+import BarUp from "../components/Bottom/BarUp";
 import { useState, useEffect } from "react";
 
 const ListPage = () => {
@@ -129,25 +130,31 @@ const ListPage = () => {
   //Search관련 함수랑 Form 다 컴포넌트로 분리하려했는데.. contextAPI, 리덕스 안쓰려면 이 방법밖에 떠오르지 않아요....
   return (
     <div>
-      <SearchForm
-        onSubmit={e => {
-          getSearchedData(keyword, e);
-        }}
-      >
-        <SearchBox keyword={keyword} setKeyword={setKeyword} />
-      </SearchForm>
-      {data[0] && data[0].stores && (
-        <StoreList
-          stores={data[0].stores}
-          data={data}
-          setData={setData}
-          dibsData={dibsData}
-          setDibsData={setDibsData}
-        />
-      )}
+      <Wrapper>
+        <SearchForm
+          onSubmit={e => {
+            getSearchedData(keyword, e);
+          }}
+        >
+          <SearchBox keyword={keyword} setKeyword={setKeyword} />
+        </SearchForm>
+        {data[0] && data[0].stores && (
+          <StoreList
+            stores={data[0].stores}
+            data={data}
+            setData={setData}
+            dibsData={dibsData}
+            setDibsData={setDibsData}
+          />
+        )}{" "}
+      </Wrapper>
+      <BarUp isMain={true} />
     </div>
   );
 };
 
 const SearchForm = styled.form``;
+const Wrapper = styled.div`
+  padding-bottom: 32px;
+`;
 export default ListPage;

@@ -1,9 +1,10 @@
+import ListPage from "./pages/ListPage";
 import MainPage from "./pages/MainPage";
 
 function App() {
   return (
     <>
-      <MainPage />
+      <ListPage />
     </>
   );
 }
