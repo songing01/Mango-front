@@ -36,7 +36,7 @@ const Store = ({
 
   return (
     <div>
-      <RestaurantBlock>
+      <StoreBlock>
         <Image src={imageUrl}></Image>
         <Info>
           <Title>{name}</Title>
@@ -56,12 +56,12 @@ const Store = ({
             {starAverage}
           </Rating>
         </Icons>
-      </RestaurantBlock>
+      </StoreBlock>
     </div>
   );
 };
 
-const RestaurantBlock = styled.div`
+const StoreBlock = styled.div`
   /*width: 358px;*/
   height: 120px;
 
