@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ReactComponent as SearchIcon } from "../../assets/search_vector.svg";
+import inputClearButton from "../../assets/ic_inputClear.svg";
 
 const SearchBox = ({ keyword, setKeyword }) => {
   const handleChange = e => {
@@ -7,8 +8,13 @@ const SearchBox = ({ keyword, setKeyword }) => {
   };
   return (
     <SearchBlock>
-      <Input onChange={handleChange} value={keyword} placeholder="식당 이름" />
       <SearchIcon width={"24.14px"} height={"24px"} />
+      <Input
+        onChange={handleChange}
+        value={keyword}
+        placeholder="식당 이름"
+        type="search"
+      />
     </SearchBlock>
   );
 };
@@ -19,7 +25,7 @@ const SearchBlock = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 8px 19px;
+  padding: 8px 16px;
 
   height: 40px;
   margin-left: 16px;
@@ -35,7 +41,7 @@ const SearchBlock = styled.div`
   border-radius: 23px;
 `;
 const Input = styled.input`
-  height: 14px;
+  height: 16px; //디자인 상 14px 인데, 그러면 clearButton이 조금 잘려서 16px로 일단 설정. 디자인팀에 수정요청 예정
 
   font-family: "Pretendard";
   font-style: normal;
@@ -49,6 +55,8 @@ const Input = styled.input`
   border: 0;
   outline: none;
 
+  margin-left: 7.86px;
+
   /* Inside auto layout */
   flex: none;
   order: 0;
@@ -56,5 +64,12 @@ const Input = styled.input`
 
   &::placeholder {
     color: #a2a2a2;
+  }
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: url(${inputClearButton}) center center no-repeat;
+    cursor: pointer;
   }
 `;
