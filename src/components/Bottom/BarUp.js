@@ -15,10 +15,13 @@ const BarUp = ({ isMain }) => {
 export default BarUp;
 
 const ScrollUpButton = styled.button`
+  position: fixed;
+  bottom: 0;
   width: 100%;
   height: 32px;
   background: #606060;
   border: 0;
+
   ${props =>
     props.isMain &&
     css`
