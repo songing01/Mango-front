@@ -1,11 +1,10 @@
-import ListPage from "./pages/ListPage";
-import BarUp from "./components/Bottom/BarUp";
+import MainPage from "./pages/MainPage";
+
 function App() {
   return (
-    <div>
-      <ListPage />
-      <BarUp />
-    </div>
+    <>
+      <MainPage />
+    </>
   );
 }
 
