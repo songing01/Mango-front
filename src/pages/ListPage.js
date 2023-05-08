@@ -148,7 +148,7 @@ const ListPage = () => {
           />
         )}{" "}
       </Wrapper>
-      <BarUp isMain={true} />
+      <BarUp isMain={false} />
     </div>
   );
 };
