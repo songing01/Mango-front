@@ -4,12 +4,7 @@ import ReviewTemplate from "../components/CreateReview/ReviewTemplate";
 const CreateReviewPage = () => {
   return (
     <div>
-      <Wrapper>
-        <div>
-          <ReviewTemplate />
-        </div>
-      </Wrapper>
-      <BarUp isMain={false} />
+      <ReviewTemplate />
     </div>
   );
 };
