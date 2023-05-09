@@ -1,8 +1,7 @@
-import styled from "styled-components";
 import { useState } from "react";
 import { ReactComponent as FilledStar } from "../../assets/star_vector.svg";
 import { ReactComponent as UnfilledStar } from "../../assets/ic_starscore.svg";
-const Stars = () => {
+const Stars = ({ setStar }) => {
   const [clicked, setClicked] = useState([false, false, false, false, false]);
 
   const array = [0, 1, 2, 3, 4];
@@ -14,7 +13,7 @@ const Stars = () => {
     }
     setClicked(clickStates);
   };
-  let score = clicked.filter(Boolean).length;
+  setStar(clicked.filter(Boolean).length);
   return (
     <>
       {array.map(el =>
