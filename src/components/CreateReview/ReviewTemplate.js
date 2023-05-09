@@ -31,7 +31,9 @@ const ReviewTemplate = () => {
     imgRef.current.value = "";
     setImgFile();
   };
-
+  const postReview = () => {
+    /*post*/
+  };
   return (
     <div>
       <Wrapper>
@@ -79,7 +81,7 @@ const ReviewTemplate = () => {
             />
           </PhotoContainer>
         )}
-        <ReviewFinish width={"100%"} />
+        <ReviewFinish width={"100%"} onClick={postReview} />
       </Wrapper>
     </div>
   );
