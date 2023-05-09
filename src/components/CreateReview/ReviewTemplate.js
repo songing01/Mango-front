@@ -1,19 +1,36 @@
 import styled from "styled-components";
 import { ReactComponent as CircleAdd } from "../../assets/icon _circle_add_.svg";
 import { ReactComponent as ReviewFinish } from "../../assets/review_finish.svg";
+import { ReactComponent as DeletePhotoButton } from "../../assets/ic_closeImage.svg";
 import Stars from "./Stars";
 import { useState } from "react";
+import { useRef } from "react";
 
 const ReviewTemplate = () => {
   const [star, setStar] = useState();
   const [inputs, setInputs] = useState({ title: "", detail: "" });
+
+  const [imgFile, setImgFile] = useState();
+  const imgRef = useRef();
 
   const { title, detail } = inputs;
   const handleChange = e => {
     const { value, name } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
-  console.log(inputs);
+
+  const saveImgFile = () => {
+    const file = imgRef.current.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImgFile(reader.result);
+    };
+  };
+  const deletePhoto = () => {
+    imgRef.current.value = "";
+    setImgFile();
+  };
 
   return (
     <div>
@@ -49,10 +66,19 @@ const ReviewTemplate = () => {
             accept="image/*"
             /* 파일 필드 숨기기 */
             style={{ display: "none" }}
+            onChange={saveImgFile}
+            ref={imgRef}
           />
         </AddPhotoButton>
-        <PhotoBox />
-
+        {imgFile && (
+          <PhotoContainer>
+            <Photo src={imgFile} />
+            <DeletePhotoButton
+              onClick={deletePhoto}
+              style={{ position: "absolute", top: "8px", left: "104px" }}
+            />
+          </PhotoContainer>
+        )}
         <ReviewFinish width={"100%"} />
       </Wrapper>
     </div>
@@ -80,7 +106,10 @@ const Score = styled.div`
 const StarBox = styled.div`
   margin-bottom: 24px;
 `;
-const PhotoBox = styled.div``;
+const PhotoContainer = styled.div`
+  position: relative;
+  margin: 16px;
+`;
 const StarText = styled.text`
   height: 19px;
   margin-bottom: 20px;
@@ -163,6 +192,12 @@ const PhotoText = styled.text`
   /* lessblack */
 
   color: #151515;
+`;
+const Photo = styled.img`
+  background: #d7d7d7;
+  border-radius: 20px;
+  width: 132px;
+  height: 132px;
 `;
 
 export default ReviewTemplate;
