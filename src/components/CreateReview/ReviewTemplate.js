@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { ReactComponent as FilledStar } from "../../assets/star_vector.svg";
-import { ReactComponent as UnfilledStar } from "../../assets/ic_starscore.svg";
+import { ReactComponent as CircleAdd } from "../../assets/icon _circle_add_.svg";
+import { ReactComponent as ReviewFinish } from "../../assets/review_finish.svg";
 import Stars from "./Stars";
 import { useState } from "react";
 
@@ -17,31 +17,51 @@ const ReviewTemplate = () => {
 
   return (
     <div>
-      <Score>
-        <StarText>별점</StarText>
-        <Stars setStar={setStar} />
-      </Score>
-      <InputBox>
-        <Title
-          name="title"
-          onChange={handleChange}
-          value={title}
-          placeholder="리뷰 제목을 작성해주세요"
-        />
-        <Detail
-          name="detail"
-          onChange={handleChange}
-          value={detail}
-          placeholder="상세 리뷰를 작성해주세요"
-        />
-      </InputBox>
-      <PhotoBox>
-        <PhotoText />
-      </PhotoBox>
+      <Wrapper>
+        <Score>
+          <StarText>별점</StarText>
+          <StarBox>
+            <Stars setStar={setStar} />
+          </StarBox>
+        </Score>
+        <InputBox>
+          <Title
+            name="title"
+            onChange={handleChange}
+            value={title}
+            placeholder="리뷰 제목을 작성해주세요"
+          />
+          <Detail
+            name="detail"
+            onChange={handleChange}
+            value={detail}
+            placeholder="상세 리뷰를 작성해주세요"
+          />
+        </InputBox>
+        <AddPhotoButton>
+          <label for="file">
+            <CircleAdd height={"16px"} width={"16px"} />
+            <PhotoText>사진 첨부하기</PhotoText>
+          </label>
+          <input
+            type="file"
+            id="file"
+            accept="image/*"
+            /* 파일 필드 숨기기 */
+            style={{ display: "none" }}
+          />
+        </AddPhotoButton>
+        <PhotoBox />
+
+        <ReviewFinish width={"100%"} />
+      </Wrapper>
     </div>
   );
 };
 
+const Wrapper = styled.div`
+  margin: 16px;
+`;
 const InputBox = styled.div`
   height: 240px;
   width: 100%;
@@ -52,11 +72,18 @@ const InputBox = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const Score = styled.div``;
-
+const Score = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const StarBox = styled.div`
+  margin-bottom: 24px;
+`;
+const PhotoBox = styled.div``;
 const StarText = styled.text`
-  width: 28px;
   height: 19px;
+  margin-bottom: 20px;
 
   /* bold16 */
 
@@ -114,9 +141,17 @@ const Detail = styled.textarea`
     outline: none;
   }
 `;
-const PhotoBox = styled.div``;
+const AddPhotoButton = styled.div`
+  margin-top: 16px;
+  height: 19px;
+  display: flex;
+  align-items: center;
+`;
 const PhotoText = styled.text`
+  height: 16px;
+
   /* bold16 */
+  margin-left: 4px;
 
   font-family: "Pretendard";
   font-style: normal;
