@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import BarUp from "../components/Bottom/BarUp";
-const MainPage = () => {
+import ReviewTemplate from "../components/CreateReview/ReviewTemplate";
+const CreateReviewPage = () => {
   return (
     <div>
-      <Wrapper>
-        <div>페이지 내용</div>
-      </Wrapper>
-      <BarUp isMain={true} />
+      <ReviewTemplate />
     </div>
   );
 };
@@ -14,4 +12,4 @@ const MainPage = () => {
 const Wrapper = styled.div`
   padding-bottom: 32px;
 `;
-export default MainPage;
+export default CreateReviewPage;
