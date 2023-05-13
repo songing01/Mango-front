@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import StoreList from "../components/List/StoreList";
 import SearchBox from "../components/List/SearchBox";
-import BarUp from "../components/Bottom/BarUp";
+import BarUp from "../components/Button/BarUp";
 import { useState, useEffect } from "react";
 
 const ListPage = () => {

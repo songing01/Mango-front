@@ -11,7 +11,8 @@ import EditorsBtn from "../components/Button/Main/EditorsBtn";
 const MainPage = () => {
   return (
     <Div>
-      <TopNavbar />
+      <TopNavbar noTitle />
+      {/* <TopNavbar title="내 위치" subTitle="신촌" subTitleColor="#15D0F9" /> */}
 
       <Logo src={logo} />
 
@@ -19,7 +20,11 @@ const MainPage = () => {
         <SearchBox />
         <NearbyBtn />
         <MainButtonContainer />
-        <MainSlideBtnContainer />
+      </Container>
+
+      <MainSlideBtnContainer />
+
+      <Container>
         <EditorsBtn />
       </Container>
     </Div>
@@ -43,7 +48,7 @@ const Logo = styled.img`
   height: auto;
 
   position: absolute;
-  top: 9px;
+  top: 15px;
   left: 16px;
 `;
 
