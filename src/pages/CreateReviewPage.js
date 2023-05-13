@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import BarUp from "../components/Bottom/BarUp";
+import BarUp from "../components/Button/BarUp";
 import ReviewTemplate from "../components/CreateReview/ReviewTemplate";
 const CreateReviewPage = () => {
   return (
