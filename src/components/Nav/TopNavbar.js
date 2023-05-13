@@ -24,7 +24,7 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
 
   const sidebarRef = useRef(null);
 
-  const onClickOutside = e => {
+  const _handleCloseSidebar = e => {
     if (!sidebarRef.current?.contains(e.target)) {
       return setSideberOpen(false);
     }
@@ -41,9 +41,6 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
     setSideberOpen(true);
   };
 
-  const _handleCloseSidebar = () => {
-    setSideberOpen(false);
-  };
   return (
     <NavDiv noTitle={noTitle}>
       {!noTitle && (
@@ -61,11 +58,7 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
         <img src={user} className="user" onClick={_handleOpenSidebar} />
       </IconsBox>
 
-      <Sidebar
-        isOpen={sidebarOpen}
-        ToggleoOen={_handleOpenSidebar}
-        ToggleClose={_handleCloseSidebar}
-      />
+      <Sidebar isOpen={sidebarOpen} />
     </NavDiv>
   );
 };
