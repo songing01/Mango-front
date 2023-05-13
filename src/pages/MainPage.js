@@ -11,8 +11,8 @@ import EditorsBtn from "../components/Button/Main/EditorsBtn";
 const MainPage = () => {
   return (
     <Div>
-      {/* <TopNavbar noTitle /> */}
-      <TopNavbar title="내 위치" subTitle="신촌" subTitleColor="#15D0F9" />
+      <TopNavbar noTitle />
+      {/* <TopNavbar title="내 위치" subTitle="신촌" subTitleColor="#15D0F9" /> */}
 
       <Logo src={logo} />
 
