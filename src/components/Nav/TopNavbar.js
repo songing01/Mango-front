@@ -31,11 +31,21 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
   };
 
   useEffect(() => {
-    document.addEventListener("click", onClickOutside, true);
+    document.addEventListener("click", _handleCloseSidebar, true);
     return () => {
-      document.removeEventListener("click", onClickOutside, true);
+      document.removeEventListener("click", _handleCloseSidebar, true);
     };
   });
+
+  /** 스크롤 방지 */
+  useEffect(() => {
+    if (sidebarOpen) {
+      console.log("스크롤방지");
+      document.getElementById("root").style.overflow = "hidden";
+    } else {
+      document.getElementById("root").style.overflow = "unset";
+    }
+  }, [sidebarOpen]);
 
   const _handleOpenSidebar = () => {
     setSideberOpen(true);
