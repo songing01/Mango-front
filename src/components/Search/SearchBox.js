@@ -15,7 +15,7 @@ const SearchBox = () => {
 export default SearchBox;
 
 const SearchDiv = styled.div`
-  margin-top: 83px;
+  margin-top: 60px;
 
   display: flex;
   justify-content: start;
