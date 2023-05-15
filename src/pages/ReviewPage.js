@@ -1,11 +1,17 @@
 import styled from "styled-components";
+import StarRate from "../components/Review/StarRate";
+import user from "../assets/icon/topnavbar/ic_user.png";
+import { ReactComponent as FilledStar } from "../assets/star_vector.svg";
+import ReviewResult from "../components/Review/ReviewResult";
 
 const ReviewPage = () => {
+  
   return (
     <Div>
-      <StarRateInfo>
-        <ProgressBar value="50" min="0" max="100"/>
-      </StarRateInfo>
+      {/* 별점 부분 */}
+      <StarRate />
+      {/* 리뷰 부분 */}
+      <ReviewResult />
     </Div>
   );
 };
@@ -19,17 +25,9 @@ const Div = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   margin: 0 5%;
-`;
 
-const StarRateInfo = styled.div`
-    width: 360px;
-    height: 120px;
-    background: #F4F4F4;
-    border-radius: 32px;
-`;
-
-const ProgressBar = styled.progress`
-
+  font-family: 'Pretendard';
+  overflow-y: scroll;
 `;
