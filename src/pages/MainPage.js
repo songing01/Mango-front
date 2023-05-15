@@ -8,6 +8,9 @@ import NearbyBtn from "../components/Button/Main/NearbyBtn";
 import MainButtonContainer from "../components/Button/Main/MainButtonContainer";
 import MainSlideBtnContainer from "../components/Button/Main/MainSlideBtnContainer";
 import EditorsBtn from "../components/Button/Main/EditorsBtn";
+import BarUp from "../components/Button/BarUp";
+import Footer from "../components/Footer/Footer";
+
 const MainPage = () => {
   return (
     <Div>
@@ -27,20 +30,26 @@ const MainPage = () => {
       <Container>
         <EditorsBtn />
       </Container>
+
+      <BarUp isMain />
+      <Footer />
     </Div>
   );
 };
-//BarUp 높이 만큼 padding
-const Wrapper = styled.div`
-  padding-bottom: 32px;
-`;
 export default MainPage;
 
 const Div = styled.div`
   position: relative;
 
   width: 100%;
-  height: 100%;
+  height: auto;
+  padding-bottom: 32px;
+`;
+
+const Container = styled.div`
+  padding: 16px;
+  box-sizing: border-box;
+  width: 100%;
 `;
 
 const Logo = styled.img`
@@ -50,11 +59,4 @@ const Logo = styled.img`
   position: absolute;
   top: 15px;
   left: 16px;
-`;
-
-const Container = styled.div`
-  padding: 16px;
-  box-sizing: border-box;
-  width: 100%;
-  height: auto;
 `;

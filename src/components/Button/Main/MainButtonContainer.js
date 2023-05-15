@@ -1,17 +1,16 @@
 import styled from "styled-components";
-import rice from "../../../assets/icon/mainbuttonbox/rice.png";
+import { mainFoodsData } from "../../../assets/data/mainFoodsData";
 
 const MainButtonContainer = () => {
-  const btn = [1, 1, 11, 1, 1, 1, 11, 1, 1, 11, 1, 1];
   return (
     <BtnContainer>
-      {btn.map(b => (
+      {mainFoodsData.map(b => (
         <IconBtn>
-          <div className="icon-box">
-            <img src={rice} />
+          <div className="icon-box" key={b.id}>
+            <img src={b.img} />
           </div>
 
-          <p>한식</p>
+          <p>{b.food}</p>
         </IconBtn>
       ))}
     </BtnContainer>
@@ -54,8 +53,10 @@ const IconBtn = styled.div`
     align-items: center;
   }
   img {
-    width: 36px;
-    height: 36px;
+    width: auto;
+    height: auto;
+    max-width: 34px;
+    max-height: 34px;
   }
 
   p {
@@ -69,5 +70,7 @@ const IconBtn = styled.div`
     color: #000000;
 
     margin: 6px 0 0 0;
+
+    word-break: keep-all;
   }
 `;
