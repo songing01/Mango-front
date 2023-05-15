@@ -37,6 +37,16 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
     };
   });
 
+  /** 스크롤 방지 */
+  useEffect(() => {
+    if (sidebarOpen) {
+      console.log("스크롤방지");
+      document.getElementById("root").style.overflow = "hidden";
+    } else {
+      document.getElementById("root").style.overflow = "unset";
+    }
+  }, [sidebarOpen]);
+
   const _handleOpenSidebar = () => {
     setSideberOpen(true);
   };
