@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { ReactComponent as SearchIcon } from "../../assets/search_vector.svg";
-import inputClearButton from "../../assets/ic_inputClear.svg";
+import { ReactComponent as SearchIcon } from "../../assets/icon/listicon/search_vector.svg";
+import inputClearButton from "../../assets/icon/listicon/ic_inputClear.svg";
 
 const SearchBox = ({ keyword, setKeyword }) => {
   const handleChange = e => {
