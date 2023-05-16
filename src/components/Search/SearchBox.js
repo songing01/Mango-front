@@ -7,7 +7,7 @@ const SearchBox = () => {
   return (
     <SearchDiv>
       <img src={ic_search} />
-      <input type="text" placeholder="식당 이릉" />
+      <input type="text" placeholder="식당 이름" />
     </SearchDiv>
   );
 };
