@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { ReactComponent as DibsT } from "../../assets/heartfill_vector.svg";
-import { ReactComponent as DibsF } from "../../assets/heart_vector.svg";
-import { ReactComponent as Star } from "../../assets/star_vector.svg";
+import { ReactComponent as DibsT } from "../../assets/icon/listicon/heartfill_vector.svg";
+import { ReactComponent as DibsF } from "../../assets/icon/listicon/heart_vector.svg";
+import { ReactComponent as Star } from "../../assets/icon/listicon/star_vector.svg";
 import { useEffect, useState } from "react";
 
 const Store = ({

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { ReactComponent as CircleAdd } from "../../assets/icon _circle_add_.svg";
-import { ReactComponent as ReviewFinish } from "../../assets/review_finish.svg";
-import { ReactComponent as DeletePhotoButton } from "../../assets/ic_closeImage.svg";
+import { ReactComponent as CircleAdd } from "../../assets/icon/createreviewicon/icon _circle_add_.svg";
+import { ReactComponent as ReviewFinish } from "../../assets/icon/createreviewicon/review_finish.svg";
+import { ReactComponent as DeletePhotoButton } from "../../assets/icon/createreviewicon/ic_closeImage.svg";
 import Stars from "./Stars";
 import { useState } from "react";
 import { useRef } from "react";
