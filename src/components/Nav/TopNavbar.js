@@ -6,6 +6,8 @@ import leftarrow from "../../assets/icon/topnavbar/ic_left.png";
 import user from "../../assets/icon/topnavbar/ic_user.png";
 // component
 import Sidebar from "./SideBar";
+// api
+import { GetMyHeartListAPI } from "../../api/heart";
 
 /** ⭐ 사용 예시
  * <TopNavbar noTitle />
@@ -20,24 +22,43 @@ import Sidebar from "./SideBar";
  */
 
 const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
-  const [sidebarOpen, setSideberOpen] = useState(false);
+  const [sidebarOpen, setSideberOpen] = useState(false); // 사이드바 open 여부
+  const [heartList, setHeartList] = useState([]); // 찜 목록
 
-  const sidebarRef = useRef(null);
+  const sidebarRef = useRef(null); // 사이드바 dom
 
+  /** 사이드바 닫기 함수*/
   const _handleCloseSidebar = e => {
     if (!sidebarRef.current?.contains(e.target)) {
       return setSideberOpen(false);
     }
   };
 
-  useEffect(() => {
-    document.addEventListener("click", _handleCloseSidebar, true);
-    return () => {
-      document.removeEventListener("click", _handleCloseSidebar, true);
-    };
-  });
+  /** 사이드바 열기 함수 */
+  const _handleOpenSidebar = () => {
+    setSideberOpen(true);
+  };
 
-  /** 스크롤 방지 */
+  /** 내 찜 목록 불러오는 비동기 함수 */
+  const _ruqGetMyHeartsList = async () => {
+    const res = await GetMyHeartListAPI();
+    console.log(res);
+    setHeartList(res.data);
+  };
+
+  useEffect(() => {
+    // 뒷 배경 클릭 시 자동으로 사이드바 닫힘
+    document.addEventListener("click", _handleCloseSidebar, true);
+
+    // 찜 목록 불러오기
+    _ruqGetMyHeartsList();
+
+    return () => {
+      document.removeEventListener("click", _handleCloseSidebar, true); // clean up
+    };
+  }, []);
+
+  /** 사이드바 열었을 때 배경 스크롤 방지 */
   useEffect(() => {
     if (sidebarOpen) {
       console.log("스크롤방지");
@@ -46,10 +67,6 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
       document.getElementById("root").style.overflow = "unset";
     }
   }, [sidebarOpen]);
-
-  const _handleOpenSidebar = () => {
-    setSideberOpen(true);
-  };
 
   return (
     <NavDiv noTitle={noTitle}>
@@ -68,7 +85,7 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
         <img src={user} className="user" onClick={_handleOpenSidebar} />
       </IconsBox>
 
-      <Sidebar isOpen={sidebarOpen} />
+      <Sidebar isOpen={sidebarOpen} heartList={heartList} />
     </NavDiv>
   );
 };
