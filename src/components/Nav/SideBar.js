@@ -5,8 +5,14 @@ import ic_heart from "../../assets/icon/topnavbar/ic_heart.png";
 
 import food1 from "../../assets/food/food1.jpg";
 
-const Sidebar = ({ isOpen }) => {
-  const data = [1, 1, 11, 1];
+const Sidebar = ({ isOpen, heartList }) => {
+  // const test = {
+  //   heartId: 1,
+  //   memberId: 1,
+  //   storeId: 1,
+  //   name: "이펍떡볶이",
+  //   imageUrl: "https://efub/?img=14",
+  // };
 
   return (
     <Div isOpen={isOpen}>
@@ -20,12 +26,12 @@ const Sidebar = ({ isOpen }) => {
       <HeartListText>찜한 목록</HeartListText>
 
       <HeartListContainer>
-        {data.map(d => (
-          <HeartBox>
-            <HeartImgBox img={food1}>
+        {heartList?.map(h => (
+          <HeartBox key={h.storeId}>
+            <HeartImgBox img={h.imageUrl}>
               <img src={ic_heart} />
             </HeartImgBox>
-            <p>식당명</p>
+            <p>{h.name}</p>
           </HeartBox>
         ))}
       </HeartListContainer>
