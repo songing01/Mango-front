@@ -7,7 +7,7 @@ import { SPRING_URL } from "../api/url";
 const KakaoLogin = () => {
   const location = useLocation();
   const KAKAO_CODE = location.search.split("=")[1]; // 인가코드
-  const Spring = `${SPRING_URL}/members/login/oauth/kakao?code=${KAKAO_CODE}`; // 토큰 요청
+  const Spring = `${SPRING_URL}/members/login/kakao?code=${KAKAO_CODE}`; // 토큰 요청
 
   const navigate = useNavigate();
 
@@ -15,11 +15,18 @@ const KakaoLogin = () => {
   axios
     .post(Spring)
     .then(res => {
-      console.log(res);
+      console.log("요청 결과", res);
 
       const accessToken = res.data.accessToken;
+
+      // data
+      // accessToken
+      // email
+      // memberId
+      // nickname
+
       console.log(accessToken);
-      localStorage.setItem("token", accessToken);
+      localStorage.setItem("mangotoken", accessToken);
 
       navigate("/");
       window.location.reload();
