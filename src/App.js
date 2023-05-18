@@ -8,18 +8,23 @@ import CreateReviewPage from "./pages/CreateReviewPage";
 import DetailPage from "./pages/DetailPage";
 import ReviewPage from "./pages/ReviewPage";
 import KakoLoginPage from "./pages/KakaoLoginPage";
+// route
+import PrivateRoute from "./components/Route/PrivateRoute";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<MainPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/KakaoLogin" element={<KakoLoginPage />} />
 
-      <Route path="/list" element={<ListPage />} />
-      <Route path="/create-review" element={<CreateReviewPage />} />
-      <Route path="/detail" element={<DetailPage />} />
-      <Route path="/review" element={<ReviewPage />} />
+      {/* 로그인 해야 접근 가능한 페이지 */}
+      <Route element={<PrivateRoute />}>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/list" element={<ListPage />} />
+        <Route path="/create-review" element={<CreateReviewPage />} />
+        <Route path="/detail" element={<DetailPage />} />
+        <Route path="/review" element={<ReviewPage />} />
+      </Route>
     </Routes>
   );
 }
