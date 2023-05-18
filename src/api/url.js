@@ -1,1 +1,1 @@
-export const SPRING_URL = "https://api.mangoplate-clone.com";
+export const SPRING_URL = "https://api.mangoplate-clone.com/";
