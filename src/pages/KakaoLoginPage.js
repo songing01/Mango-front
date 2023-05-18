@@ -7,7 +7,7 @@ import { SPRING_URL } from "../api/url";
 const KakaoLogin = () => {
   const location = useLocation();
   const KAKAO_CODE = location.search.split("=")[1]; // 인가코드
-  const Spring = `${SPRING_URL}/members/login/kakao?code=${KAKAO_CODE}`; // 토큰 요청
+  const Spring = `${SPRING_URL}members/login/kakao?code=${KAKAO_CODE}`; // 토큰 요청
 
   const navigate = useNavigate();
 
