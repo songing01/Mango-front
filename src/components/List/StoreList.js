@@ -8,15 +8,15 @@ const StoreList = ({ stores, data, setData, dibsData, setDibsData }) => {
         stores.map(store => {
           return (
             <Store
-              key={store.Id}
-              Id={store.Id}
+              key={store.storeId}
+              Id={store.storeId}
               name={store.name}
               address={store.address}
               imageUrl={store.imageUrl}
               recommendation={store.recommendation}
               averagePrice={store.averagePrice}
               starAverage={store.starAverage}
-              data={data}
+              store={store}
               setData={setData}
               dibsData={dibsData}
               setDibsData={setDibsData}

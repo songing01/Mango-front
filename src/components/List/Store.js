@@ -3,7 +3,9 @@ import { ReactComponent as DibsT } from "../../assets/icon/listicon/heartfill_ve
 import { ReactComponent as DibsF } from "../../assets/icon/listicon/heart_vector.svg";
 import { ReactComponent as Star } from "../../assets/icon/listicon/star_vector.svg";
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { PostMyHeartListAPI, DeleteMyHeartListAPI } from "../../api/heart";
 const Store = ({
   Id,
   name,
@@ -12,7 +14,7 @@ const Store = ({
   recommendation,
   averagePrice,
   starAverage,
-  data,
+  store,
   setData,
   dibsData,
   setDibsData,
@@ -23,35 +25,55 @@ const Store = ({
       dibsData.map(data =>
         data.name === name ? setDibs(true) : setDibs(false),
       );
-  }, []); //토글기능 구현시, 빈 배열대신 dibsData 넣기
+  }, [dibsData]);
 
-  const toggleDibs = () => {
-    //찜하기
-    //curl --location --request POST 'http://localhost:8080/hearts/1' \
-    //--header 'token: abcdef123456'
-    //찜취소
-    //curl --location --request DELETE 'http://localhost:8080/hearts/1' \
-    //--header 'token: abcdef123456'
+  const toggleDibs = async () => {
     setDibs(!dibs);
+  };
+
+  const useDidMountEffect = (func, deps) => {
+    const didMount = useRef(false);
+
+    useEffect(() => {
+      if (didMount.current) func();
+      else didMount.current = true;
+    }, deps);
+  };
+  useDidMountEffect(() => {
+    updateDibs();
+  }, [dibs]);
+
+  const updateDibs = async () => {
+    if (dibs) {
+      const res = await PostMyHeartListAPI(Id);
+      console.log(res);
+    } else {
+      const res = await DeleteMyHeartListAPI(Id);
+      console.log(res);
+    }
+  };
+  const navigate = useNavigate();
+  const navigateToDetail = () => {
+    navigate("/detail", { state: { ...store } });
   };
 
   return (
     <div>
       <StoreBlock>
         <Image src={imageUrl}></Image>
-        <Info>
+        <Info onClick={navigateToDetail}>
           <Title>{name}</Title>
           <Location>{address}</Location>
           <Recommendation>{recommendation}</Recommendation>
           <AvgPrice>{averagePrice}</AvgPrice>
         </Info>
+
         <Icons>
           {dibs ? (
             <DibsT onClick={toggleDibs} width={"20px"} height={"18px"} />
           ) : (
             <DibsF onClick={toggleDibs} width={"20px"} height={"18px"} />
           )}
-
           <Rating>
             <Star />
             {starAverage}
