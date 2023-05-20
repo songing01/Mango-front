@@ -5,7 +5,7 @@ import ic_heart from "../../assets/icon/topnavbar/ic_heart.png";
 
 import food1 from "../../assets/food/food1.jpg";
 
-const Sidebar = ({ isOpen, heartList }) => {
+const Sidebar = ({ isOpen, heartList, userInfo }) => {
   // const test = {
   //   heartId: 1,
   //   memberId: 1,
@@ -18,7 +18,7 @@ const Sidebar = ({ isOpen, heartList }) => {
     <Div isOpen={isOpen}>
       <ProfileBox>
         <img src={ic_user} />
-        <p>성이름</p>
+        <p>{userInfo?.nickname}</p>
       </ProfileBox>
 
       <Hr />

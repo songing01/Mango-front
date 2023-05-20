@@ -8,6 +8,7 @@ import user from "../../assets/icon/topnavbar/ic_user.png";
 import Sidebar from "./SideBar";
 // api
 import { GetMyHeartListAPI } from "../../api/heart";
+import { GetUserInfo } from "../../api/user";
 
 /** ⭐ 사용 예시
  * <TopNavbar noTitle />
@@ -24,6 +25,7 @@ import { GetMyHeartListAPI } from "../../api/heart";
 const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
   const [sidebarOpen, setSideberOpen] = useState(false); // 사이드바 open 여부
   const [heartList, setHeartList] = useState([]); // 찜 목록
+  const [userInfo, setUserInfo] = useState(null);
 
   const sidebarRef = useRef(null); // 사이드바 dom
 
@@ -39,11 +41,18 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
     setSideberOpen(true);
   };
 
+  /** 유저 정보 불러오는 비동기 함수 */
+  const _reqGetUserInfo = async () => {
+    const res = await GetUserInfo();
+    console.log(res);
+    setUserInfo(res);
+  };
+
   /** 내 찜 목록 불러오는 비동기 함수 */
-  const _ruqGetMyHeartsList = async () => {
+  const _reqGetMyHeartsList = async () => {
     const res = await GetMyHeartListAPI();
     console.log(res);
-    setHeartList(res.data);
+    setHeartList(res);
   };
 
   useEffect(() => {
@@ -51,7 +60,9 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
     document.addEventListener("click", _handleCloseSidebar, true);
 
     // 찜 목록 불러오기
-    _ruqGetMyHeartsList();
+    _reqGetMyHeartsList();
+    // 유저 정보 불러오기
+    _reqGetUserInfo();
 
     return () => {
       document.removeEventListener("click", _handleCloseSidebar, true); // clean up
@@ -85,7 +96,7 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
         <img src={user} className="user" onClick={_handleOpenSidebar} />
       </IconsBox>
 
-      <Sidebar isOpen={sidebarOpen} heartList={heartList} />
+      <Sidebar isOpen={sidebarOpen} heartList={heartList} userInfo={userInfo} />
     </NavDiv>
   );
 };
