@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { PostMyHeartListAPI, DeleteMyHeartListAPI } from "../../api/heart";
+import { GetMyHeartListAPI } from "../../api/heart";
 const Store = ({
   Id,
   name,
@@ -15,17 +16,20 @@ const Store = ({
   averagePrice,
   starAverage,
   store,
-  setData,
   dibsData,
   setDibsData,
 }) => {
-  const [dibs, setDibs] = useState(false);
+  const [dibs, setDibs] = useState();
   useEffect(() => {
+    console.log("아아", dibsData);
     dibsData &&
-      dibsData.map(data =>
-        data.name === name ? setDibs(true) : setDibs(false),
-      );
+      dibsData.map(data => (data.name === store.name ? setDibs(true) : data));
   }, [dibsData]);
+
+  const getDibsData = async () => {
+    const res = await GetMyHeartListAPI();
+    setDibsData(res);
+  };
 
   const toggleDibs = async () => {
     setDibs(!dibs);
@@ -37,7 +41,7 @@ const Store = ({
     useEffect(() => {
       if (didMount.current) func();
       else didMount.current = true;
-    }, deps);
+    }, [dibs]);
   };
   useDidMountEffect(() => {
     updateDibs();
@@ -46,10 +50,11 @@ const Store = ({
   const updateDibs = async () => {
     if (dibs) {
       const res = await PostMyHeartListAPI(Id);
-      console.log(res);
+      await getDibsData();
     } else {
-      const res = await DeleteMyHeartListAPI(Id);
-      console.log(res);
+      await DeleteMyHeartListAPI(Id);
+      const res = await getDibsData();
+      console.log("랄라", res);
     }
   };
   const navigate = useNavigate();
