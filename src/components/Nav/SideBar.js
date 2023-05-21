@@ -1,9 +1,8 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import ic_user from "../../assets/icon/topnavbar/ic_user.png";
 import ic_heart from "../../assets/icon/topnavbar/ic_heart.png";
-
-import food1 from "../../assets/food/food1.jpg";
 
 const Sidebar = ({ isOpen, heartList, userInfo }) => {
   // const test = {
@@ -13,6 +12,11 @@ const Sidebar = ({ isOpen, heartList, userInfo }) => {
   //   name: "이펍떡볶이",
   //   imageUrl: "https://efub/?img=14",
   // };
+
+  const navigate = useNavigate();
+  const _handleGotoStore = storeId => {
+    navigate(`/detail/${storeId}`);
+  };
 
   return (
     <Div isOpen={isOpen}>
@@ -27,7 +31,7 @@ const Sidebar = ({ isOpen, heartList, userInfo }) => {
 
       <HeartListContainer>
         {heartList?.map(h => (
-          <HeartBox key={h.storeId}>
+          <HeartBox key={h.storeId} onClick={() => _handleGotoStore(h.storeId)}>
             <HeartImgBox img={h.imageUrl}>
               <img src={ic_heart} />
             </HeartImgBox>

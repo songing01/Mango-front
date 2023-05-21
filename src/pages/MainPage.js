@@ -15,7 +15,6 @@ const MainPage = () => {
   return (
     <Div>
       <TopNavbar noTitle />
-
       <Logo src={logo} />
 
       <Container>
