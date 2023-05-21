@@ -67,7 +67,6 @@ const MenuTypeToggle = styled.div`
     font-size: 16px;
     line-height: 19px;
     color: #A2A2A2;
-}
 `;
 
 const FoodItem = styled.div`

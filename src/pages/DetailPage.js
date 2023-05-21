@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import RestaurantInfo from '../components/Detail/RestaurantInfo';
 import RestaurantMenu from '../components/Detail/RestaurantMenu';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { GetStoreDetailAPI } from '../api/store';
 
 // detail 페이지
@@ -12,8 +12,7 @@ const DetailPage = () => {
     const [storeData, setStoreData] = useState([]);
     
     // list 페이지로부터 받은 가게 아이디
-    const location = useLocation();
-    const storeId = location.state;
+    const { storeId } = useParams();
 
     console.log("가게 아이디 : ");
     console.log(storeId);
