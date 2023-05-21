@@ -3,12 +3,9 @@ import styled from "styled-components";
 // asset
 import kakao from "../../assets/icon/kakao.png";
 
-const KakaoBtn = () => {
-  const _handleKakaoLogin = () => {
-    console.log("카카오로그인 요청");
-  };
+const KakaoBtn = ({ onClick }) => {
   return (
-    <Btn onClick={_handleKakaoLogin}>
+    <Btn onClick={onClick}>
       <img src={kakao} /> <p>카카오 로그인</p>
     </Btn>
   );

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { ReactComponent as Up } from "../../assets/up_vector.svg";
+import { ReactComponent as Up } from "../../assets/icon/barupbtn/up_vector.svg";
 
 const BarUp = ({ isMain }) => {
   const moveToTop = () => {

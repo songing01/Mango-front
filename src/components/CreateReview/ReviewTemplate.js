@@ -1,19 +1,22 @@
 import styled from "styled-components";
-import { ReactComponent as CircleAdd } from "../../assets/icon _circle_add_.svg";
-import { ReactComponent as ReviewFinish } from "../../assets/review_finish.svg";
-import { ReactComponent as DeletePhotoButton } from "../../assets/ic_closeImage.svg";
+import { ReactComponent as CircleAdd } from "../../assets/icon/createreviewicon/icon _circle_add_.svg";
+import { ReactComponent as ReviewFinish } from "../../assets/icon/createreviewicon/review_finish.svg";
+import { ReactComponent as DeletePhotoButton } from "../../assets/icon/createreviewicon/ic_closeImage.svg";
 import Stars from "./Stars";
 import { useState } from "react";
 import { useRef } from "react";
-
-const ReviewTemplate = () => {
+import axios from "axios";
+import { PostReviewAPI } from "../../api/review";
+const ReviewTemplate = ({ storeId }) => {
   const [star, setStar] = useState();
   const [inputs, setInputs] = useState({ title: "", detail: "" });
 
   const [imgFile, setImgFile] = useState();
   const imgRef = useRef();
 
+  const token = process.env.REACT_APP_REST_API_KEY;
   const { title, detail } = inputs;
+
   const handleChange = e => {
     const { value, name } = e.target;
     setInputs({ ...inputs, [name]: value });
@@ -31,9 +34,14 @@ const ReviewTemplate = () => {
     imgRef.current.value = "";
     setImgFile();
   };
-  const postReview = () => {
-    /*post*/
+  const postReview = async () => {
+    let hasImage = false;
+    if (imgFile) {
+      hasImage = true;
+    }
+    await PostReviewAPI(storeId, star, title, detail, hasImage, imgFile);
   };
+
   return (
     <div>
       <Wrapper>
@@ -88,7 +96,7 @@ const ReviewTemplate = () => {
 };
 
 const Wrapper = styled.div`
-  margin: 16px;
+  margin: 40px 16px 16px;
 `;
 const InputBox = styled.div`
   height: 240px;

@@ -1,9 +1,12 @@
 import styled from "styled-components";
-import { ReactComponent as DibsT } from "../../assets/heartfill_vector.svg";
-import { ReactComponent as DibsF } from "../../assets/heart_vector.svg";
-import { ReactComponent as Star } from "../../assets/star_vector.svg";
+import { ReactComponent as DibsT } from "../../assets/icon/listicon/heartfill_vector.svg";
+import { ReactComponent as DibsF } from "../../assets/icon/listicon/heart_vector.svg";
+import { ReactComponent as Star } from "../../assets/icon/listicon/star_vector.svg";
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { PostMyHeartListAPI, DeleteMyHeartListAPI } from "../../api/heart";
+import { GetMyHeartListAPI } from "../../api/heart";
 const Store = ({
   Id,
   name,
@@ -12,46 +15,70 @@ const Store = ({
   recommendation,
   averagePrice,
   starAverage,
-  data,
-  setData,
+  store,
   dibsData,
   setDibsData,
 }) => {
-  const [dibs, setDibs] = useState(false);
+  const [dibs, setDibs] = useState();
   useEffect(() => {
+    console.log("아아", dibsData);
     dibsData &&
-      dibsData.map(data =>
-        data.name === name ? setDibs(true) : setDibs(false),
-      );
-  }, []); //토글기능 구현시, 빈 배열대신 dibsData 넣기
+      dibsData.map(data => (data.name === store.name ? setDibs(true) : data));
+  }, [dibsData]);
 
-  const toggleDibs = () => {
-    //찜하기
-    //curl --location --request POST 'http://localhost:8080/hearts/1' \
-    //--header 'token: abcdef123456'
-    //찜취소
-    //curl --location --request DELETE 'http://localhost:8080/hearts/1' \
-    //--header 'token: abcdef123456'
+  const getDibsData = async () => {
+    const res = await GetMyHeartListAPI();
+    setDibsData(res);
+  };
+
+  const toggleDibs = async () => {
     setDibs(!dibs);
+  };
+
+  const useDidMountEffect = (func, deps) => {
+    const didMount = useRef(false);
+
+    useEffect(() => {
+      if (didMount.current) func();
+      else didMount.current = true;
+    }, [dibs]);
+  };
+  useDidMountEffect(() => {
+    updateDibs();
+  }, [dibs]);
+
+  const updateDibs = async () => {
+    if (dibs) {
+      const res = await PostMyHeartListAPI(Id);
+      await getDibsData();
+    } else {
+      await DeleteMyHeartListAPI(Id);
+      const res = await getDibsData();
+      console.log("랄라", res);
+    }
+  };
+  const navigate = useNavigate();
+  const navigateToDetail = () => {
+    navigate("/detail", { state: Id });
   };
 
   return (
     <div>
       <StoreBlock>
         <Image src={imageUrl}></Image>
-        <Info>
+        <Info onClick={navigateToDetail}>
           <Title>{name}</Title>
           <Location>{address}</Location>
           <Recommendation>{recommendation}</Recommendation>
           <AvgPrice>{averagePrice}</AvgPrice>
         </Info>
+
         <Icons>
           {dibs ? (
             <DibsT onClick={toggleDibs} width={"20px"} height={"18px"} />
           ) : (
             <DibsF onClick={toggleDibs} width={"20px"} height={"18px"} />
           )}
-
           <Rating>
             <Star />
             {starAverage}
