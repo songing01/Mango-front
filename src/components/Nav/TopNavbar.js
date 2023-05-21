@@ -20,9 +20,10 @@ import { GetUserInfo } from "../../api/user";
  *  2. title : 중앙에 들어가는 굵은 글씨 타이틀
  *  3. subTitle : title 밑에 들어가는 서브 텍스트
  *  4. subTitleColor : subTitle의 색상코드. 디폴트는 색상은 #151515
+ *  5. updateTime : 찜 리스트 요청 시간. updateTime이 달라질 때 마다 찜 목록 업데이트
  */
 
-const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
+const TopNavbar = ({ noTitle, title, subTitle, subTitleColor, updateTime }) => {
   const [sidebarOpen, setSideberOpen] = useState(false); // 사이드바 open 여부
   const [heartList, setHeartList] = useState([]); // 찜 목록
   const [userInfo, setUserInfo] = useState(null);
@@ -51,16 +52,13 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
   /** 내 찜 목록 불러오는 비동기 함수 */
   const _reqGetMyHeartsList = async () => {
     const res = await GetMyHeartListAPI();
-    console.log(res);
+    console.log("찜목록", res);
     setHeartList(res);
   };
 
   useEffect(() => {
     // 뒷 배경 클릭 시 자동으로 사이드바 닫힘
     document.addEventListener("click", _handleCloseSidebar, true);
-
-    // 찜 목록 불러오기
-    _reqGetMyHeartsList();
     // 유저 정보 불러오기
     _reqGetUserInfo();
 
@@ -68,6 +66,12 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
       document.removeEventListener("click", _handleCloseSidebar, true); // clean up
     };
   }, []);
+
+  useEffect(() => {
+    // 찜 목록 불러오기
+    _reqGetMyHeartsList();
+    console.log("찜 목록 요청");
+  }, [updateTime]);
 
   /** 사이드바 열었을 때 배경 스크롤 방지 */
   useEffect(() => {
