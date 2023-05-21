@@ -7,16 +7,31 @@ import Heart from '../../assets/icon/detailbuttonbox/ic_heart.png';
 
 const { kakao } = window;
 
-const RestaurantInfo = () => {
+const RestaurantInfo = (
+    {address, starAverage, operationHours, phone, isParking}
+) => {
 
     useEffect(()=>{
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
         mapOptions = {
-            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-            level: 3 // 지도의 확대 레벨
+            center: new kakao.maps.LatLng(37.555134, 126.936893), // 지도의 중심좌표
+            level: 3, // 지도의 확대 레벨
+            isPanto: true,
         };
+
         // 지도를 표시할 div와 지도 옵션으로 지도를 생성합니다
         var map = new kakao.maps.Map(mapContainer, mapOptions);
+
+        // 현재 위치 마커가 표시될 위치입니다 
+        var markerPosition  = new kakao.maps.LatLng(37.555134, 126.936893); 
+
+        // 현재 위치 마커를 생성합니다
+        var marker = new kakao.maps.Marker({
+            position: markerPosition
+        });
+
+        // 마커가 지도 위에 표시되도록 설정합니다
+        marker.setMap(map);
     }, []);
 
     return (
@@ -25,7 +40,7 @@ const RestaurantInfo = () => {
             <IconButtons>
                 <Icon>
                     <IconImage src={Star} alt="별점"/>
-                    <IconDesc>0.0</IconDesc>
+                    <IconDesc>{starAverage}</IconDesc>
                 </Icon>
                 <Icon>
                     <IconImage src={WatchReview} alt="리뷰 보기"/>
@@ -41,15 +56,15 @@ const RestaurantInfo = () => {
             <InfoList>
                 <Info>
                     <span>운영 시간</span>
-                    <span>00:00 ~ 00:00</span>
+                    <span>{operationHours}</span>
                 </Info>
                 <Info>
                     <span>연락처</span>
-                    <span>00-0000-0000</span>
+                    <span>{phone}</span>
                 </Info>
                 <Info>
                     <span>주차가능여부</span>
-                    <span>가능</span>
+                    <span>{isParking == 1 ? "가능" : "불가능"}</span>
                 </Info>
             </InfoList>
         </>

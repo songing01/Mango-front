@@ -18,3 +18,12 @@ export const GetSearchedStoreListAPI = async keyword => {
     console.log("에러 발생", err);
   }
 };
+export const GetStoreDetailAPI = async storeId => {
+  try {
+    const res = await client.get(`stores/details/${storeId}`);
+
+    return res.data;
+  } catch (err) {
+    console.log("에러 발생", err);
+  }
+};
