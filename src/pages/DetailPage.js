@@ -33,7 +33,9 @@ const DetailPage = () => {
 
     return (
         <Div>
-            <RestaurantInfo address = {storeData.address}
+            <RestaurantInfo 
+                name = {storeData.name}
+                address = {storeData.address}
                 starAverage = {storeData.starAverage}
                 operationHours = {storeData.operationHours}
                 phone = {storeData.phone}
