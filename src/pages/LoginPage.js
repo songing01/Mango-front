@@ -6,9 +6,7 @@ import logo from "../assets/logo/logo.png";
 import KakaoBtn from "../components/Button/KakaoBtn";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
-
-  const CLIENT_MAIN_URL = "http://localhost:3000";
+  const CLIENT_MAIN_URL = process.env.REACT_APP_REACT_URL;
 
   const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
 
