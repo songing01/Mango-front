@@ -1,20 +1,38 @@
 //lib
+import { useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 // asset
 import ic_search from "../../assets/icon/searchbox/ic_search.png";
 
 const SearchBox = () => {
+  const [search, setSearch] = useState("");
+
+  const navigate = useNavigate();
+
+  /** 검색 시 list 페이지로 이동 */
+  const _handleSubmitSearch = e => {
+    e.preventDefault();
+    localStorage.setItem("mango-search", search); // 검색어 로컬스토리지에 저장
+    navigate("/list");
+  };
+
   return (
-    <SearchDiv>
+    <SearchForm onSubmit={e => _handleSubmitSearch(e)}>
       <img src={ic_search} />
-      <input type="text" placeholder="식당 이름" />
-    </SearchDiv>
+      <input
+        type="text"
+        placeholder="식당 이름"
+        value={search}
+        onChange={e => setSearch(e.target.value)}
+      />
+    </SearchForm>
   );
 };
 
 export default SearchBox;
 
-const SearchDiv = styled.div`
+const SearchForm = styled.form`
   margin-top: 60px;
 
   display: flex;
