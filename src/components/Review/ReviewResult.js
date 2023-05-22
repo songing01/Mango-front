@@ -15,20 +15,14 @@ const ReviewResult = ({ storeId }) => {
     setSelectedOption(event.target.value);
   };
 
-  console.log(selectedOption);
-
   // storeId, selectedOption를 바탕으로 서버에서 메뉴 데이터 가져오기
   const getReview = async (storeId, selectedOption) => {
     const res = await GetReviewAPI(storeId, selectedOption);
-    console.log("요청한 리뷰 데이터");
-    console.log(res);
     setReviewData(res);
   };
 
   const getUserId = async () => {
     const res = await GetUserInfo();
-    console.log("유저 정보");
-    console.log(res.memberId);
     setUserId(res.memberId);
   }
 

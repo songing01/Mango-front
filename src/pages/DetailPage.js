@@ -14,14 +14,10 @@ const DetailPage = () => {
   // list 페이지로부터 받은 가게 아이디
   const { storeId } = useParams();
 
-  console.log("가게 아이디 : ");
-  console.log(storeId);
-
   // 가게 정보 아이디로 서버에서 가게 정보 알아오기
   const getStoreDetailData = async storeId => {
     if (storeId) {
       const res = await GetStoreDetailAPI(storeId);
-      console.log(res);
       setStoreData(res);
     }
   };
