@@ -19,12 +19,6 @@ const KakaoLogin = () => {
 
       const accessToken = res.data.accessToken;
 
-      // data
-      // accessToken
-      // email
-      // memberId
-      // nickname
-
       console.log(accessToken);
       localStorage.setItem("mangotoken", accessToken);
 
