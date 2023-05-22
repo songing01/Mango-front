@@ -3,10 +3,13 @@ import styled from "styled-components";
 import user from "../../assets/icon/topnavbar/ic_user.png";
 import { ReactComponent as FilledStar } from "../../assets/star_vector.svg";
 import { GetReviewAPI } from "../../api/review";
+import { GetUserInfo } from "../../api/user";
+import { DeleteMyReviewAPI } from "../../api/review"
 
 const ReviewResult = ({ storeId }) => {
   const [selectedOption, setSelectedOption] = useState("LATEST");
   const [reviewData, setReviewData] = useState([]);
+  const [userId, setUserId] = useState(0);
 
   const handleOptionChange = event => {
     setSelectedOption(event.target.value);
@@ -22,10 +25,26 @@ const ReviewResult = ({ storeId }) => {
     setReviewData(res);
   };
 
+  const getUserId = async () => {
+    const res = await GetUserInfo();
+    console.log("유저 정보");
+    console.log(res.memberId);
+    setUserId(res.memberId);
+  }
+
+  const DeleteReview = async (reviewId) => {
+    await DeleteMyReviewAPI(reviewId);
+  }
+  
+
   // storeId와 selectedOption가 바뀔 때마다 데이터 가져오기
   useEffect(() => {
     getReview(storeId, selectedOption);
   }, [storeId, selectedOption]);
+
+  useEffect(() => {
+    getUserId();
+  }, []);
 
   return (
     <>
@@ -54,19 +73,24 @@ const ReviewResult = ({ storeId }) => {
                   <ReviewSubText>{review.content}</ReviewSubText>
                 </div>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <FilledStar />
-                <ReviewStarRateText>{review.star}</ReviewStarRateText>
+              <div style={{ display: "flex", alignItems: "flex-start" }}>
+                {review.memberId === userId ? <DeleteBtn onClick={() => {DeleteReview(review.reviewId)}}>삭제</DeleteBtn> : null}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <FilledStar />
+                  <ReviewStarRateText>{review.star}</ReviewStarRateText>
+                </div>
               </div>
             </ReviewContent>
             {/* 이미지 필요하면 넣기, 없으면 생략 */}
-            <ReviewImage src={review.imageUrl} alt={review.title}/>
+            {review.hasImage === true && review.imageUrl != null ? (
+              <ReviewImage src={review.imageUrl} alt={review.title} />
+            ) : null}
           </ReviewItem>
         );
       })}
@@ -154,4 +178,19 @@ const ReviewImage = styled.img`
   border: 2px solid #a2a2a2;
   border-radius: 20px;
   margin-bottom: 16px;
+`;
+
+const DeleteBtn = styled.button`
+  width: 40px;
+  height: 24px;
+  background: #15d0f9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 32px;
+  margin-right: 12px;
+
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 10px;
 `;
