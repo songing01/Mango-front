@@ -32,16 +32,12 @@ const SearchBlock = styled.div`
   margin-right: 16px;
   margin-bottom: 24px;
 
-  /* lightgrey */
-
   background: #f4f4f4;
-  /* shadow */
-
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
   border-radius: 23px;
 `;
 const Input = styled.input`
-  height: 16px; //디자인 상 14px 인데, 그러면 clearButton이 조금 잘려서 16px로 일단 설정. 디자인팀에 수정요청 예정
+  height: 16px;
 
   font-family: "Pretendard";
   font-style: normal;
@@ -49,7 +45,6 @@ const Input = styled.input`
   font-size: 12px;
   line-height: 14px;
 
-  /* midgrey */
   color: #a2a2a2;
   background-color: #f4f4f4;
   border: 0;
@@ -57,7 +52,6 @@ const Input = styled.input`
 
   margin-left: 7.86px;
 
-  /* Inside auto layout */
   flex: none;
   order: 0;
   flex-grow: 1;
