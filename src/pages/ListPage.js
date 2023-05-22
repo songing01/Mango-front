@@ -19,7 +19,6 @@ const ListPage = () => {
 
   const getData = async () => {
     const res = await GetLocalStoreListAPI();
-    console.log(res);
     setData(res);
   };
   const getDibsData = async () => {
