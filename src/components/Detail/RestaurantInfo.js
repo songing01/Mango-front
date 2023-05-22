@@ -83,8 +83,10 @@ const RestaurantInfo = (
     const navigateToReview = () => {
         navigate(`/review/${storeId}`);
     };
+
+    // CreateReview로 넘어가는 함수
     const navigateToCreateReview = () => {
-        navigate(`/create-review/${storeId}`);
+        navigate(`/create-review/${storeId}/${name}`);
     };
 
 
