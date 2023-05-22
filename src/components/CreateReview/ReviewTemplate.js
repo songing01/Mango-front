@@ -42,15 +42,20 @@ const ReviewTemplate = ({ storeId }) => {
     navigate(`/review/${storeId}`);
   };
   const postReview = async () => {
-    console.log("ImgFile:", imgFile);
-    let hasImage = false;
-    if (imgFile) {
-      hasImage = true;
+    if (star != 0 && title && detail) {
+      let hasImage = false;
+      if (imgFile) {
+        hasImage = true;
+      }
+      await PostReviewAPI(storeId, star, title, detail, hasImage, imgFile);
+      navigateToReview();
+    } else if (star == 0) {
+      alert("별을 하나 이상 눌러주세요.");
+    } else if (title == "") {
+      alert("리뷰 제목을 작성해 주세요.");
+    } else if (detail == "") {
+      alert("상세 리뷰를 작성해 주세요.");
     }
-    console.log(hasImage);
-    console.log(imgFile);
-    await PostReviewAPI(storeId, star, title, detail, hasImage, imgFile);
-    navigateToReview();
   };
 
   return (
