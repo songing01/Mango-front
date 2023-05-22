@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import { useParams } from 'react-router-dom';
 import StarRate from "../components/Review/StarRate";
-import user from "../assets/icon/topnavbar/ic_user.png";
-import { ReactComponent as FilledStar } from "../assets/star_vector.svg";
 import ReviewResult from "../components/Review/ReviewResult";
 
 const ReviewPage = () => {
+
+  // detail 페이지로부터 받은 가게 아이디
+  const { storeId } = useParams();
   
   return (
     <Div>
