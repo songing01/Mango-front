@@ -4,7 +4,6 @@ import { ReactComponent as DibsF } from "../../assets/icon/listicon/heart_vector
 import { ReactComponent as Star } from "../../assets/icon/listicon/star_vector.svg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
 import { PostMyHeartListAPI, DeleteMyHeartListAPI } from "../../api/heart";
 import { GetMyHeartListAPI } from "../../api/heart";
 const Store = ({
@@ -21,6 +20,7 @@ const Store = ({
   setTime,
 }) => {
   const [dibs, setDibs] = useState();
+
   useEffect(() => {
     dibsData &&
       dibsData.map(data => (data.name === store.name ? setDibs(true) : data));
@@ -32,30 +32,20 @@ const Store = ({
   };
 
   const toggleDibs = async () => {
-    setDibs(!dibs);
-  };
-
-  const useDidMountEffect = func => {
-    const didMount = useRef(false);
-    useEffect(() => {
-      if (didMount.current) func();
-      else didMount.current = true;
-    }, [dibs]);
-  };
-
-  useDidMountEffect(() => {
     updateDibs();
-  }, [dibs]);
+  };
 
   const updateDibs = async () => {
-    if (dibs) {
-      const res = await PostMyHeartListAPI(Id);
+    if (!dibs) {
+      await PostMyHeartListAPI(Id);
       await getDibsData();
       setTime(new Date());
+      setDibs(!dibs);
     } else {
       await DeleteMyHeartListAPI(Id);
-      const res = await getDibsData();
+      await getDibsData();
       setTime(new Date());
+      setDibs(!dibs);
     }
   };
   const navigate = useNavigate();
