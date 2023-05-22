@@ -3,7 +3,7 @@ import { ReactComponent as CircleAdd } from "../../assets/icon/createreviewicon/
 import { ReactComponent as ReviewFinish } from "../../assets/icon/createreviewicon/review_finish.svg";
 import { ReactComponent as DeletePhotoButton } from "../../assets/icon/createreviewicon/ic_closeImage.svg";
 import Stars from "./Stars";
-import { useState } from "react";
+import { useImperativeHandle, useState } from "react";
 import { useRef } from "react";
 import axios from "axios";
 import { PostReviewAPI } from "../../api/review";
@@ -11,30 +11,33 @@ const ReviewTemplate = ({ storeId }) => {
   const [star, setStar] = useState();
   const [inputs, setInputs] = useState({ title: "", detail: "" });
 
-  const [imgFile, setImgFile] = useState();
+  const [imgShow, setImgShow] = useState();
   const imgRef = useRef();
 
-  const token = process.env.REACT_APP_REST_API_KEY;
   const { title, detail } = inputs;
 
+  const [imgFile, setImgFile] = useState();
   const handleChange = e => {
     const { value, name } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
 
   const saveImgFile = () => {
-    const file = imgRef.current.files[0];
+    let file = imgRef.current.files[0];
+    setImgFile(file);
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setImgFile(reader.result);
+      setImgShow(reader.result);
     };
   };
   const deletePhoto = () => {
     imgRef.current.value = "";
+    setImgShow();
     setImgFile();
   };
   const postReview = async () => {
+    console.log("ImgFile:", imgFile);
     let hasImage = false;
     if (imgFile) {
       hasImage = true;
@@ -80,9 +83,9 @@ const ReviewTemplate = ({ storeId }) => {
             ref={imgRef}
           />
         </AddPhotoButton>
-        {imgFile && (
+        {imgShow && (
           <PhotoContainer>
-            <Photo src={imgFile} />
+            <Photo src={imgShow} />
             <DeletePhotoButton
               onClick={deletePhoto}
               style={{ position: "absolute", top: "8px", left: "104px" }}
