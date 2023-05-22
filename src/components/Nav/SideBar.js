@@ -1,18 +1,28 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 import ic_user from "../../assets/icon/topnavbar/ic_user.png";
 import ic_heart from "../../assets/icon/topnavbar/ic_heart.png";
 
-import food1 from "../../assets/food/food1.jpg";
+const Sidebar = ({ isOpen, heartList, userInfo }) => {
+  // const test = {
+  //   heartId: 1,
+  //   memberId: 1,
+  //   storeId: 1,
+  //   name: "이펍떡볶이",
+  //   imageUrl: "https://efub/?img=14",
+  // };
 
-const Sidebar = ({ isOpen }) => {
-  const data = [1, 1, 11, 1];
+  const navigate = useNavigate();
+  const _handleGotoStore = storeId => {
+    navigate(`/detail/${storeId}`);
+  };
 
   return (
     <Div isOpen={isOpen}>
       <ProfileBox>
         <img src={ic_user} />
-        <p>성이름</p>
+        <p>{userInfo?.nickname}</p>
       </ProfileBox>
 
       <Hr />
@@ -20,12 +30,12 @@ const Sidebar = ({ isOpen }) => {
       <HeartListText>찜한 목록</HeartListText>
 
       <HeartListContainer>
-        {data.map(d => (
-          <HeartBox>
-            <HeartImgBox img={food1}>
+        {heartList?.map(h => (
+          <HeartBox key={h.storeId} onClick={() => _handleGotoStore(h.storeId)}>
+            <HeartImgBox img={h.imageUrl}>
               <img src={ic_heart} />
             </HeartImgBox>
-            <p>식당명</p>
+            <p>{h.name}</p>
           </HeartBox>
         ))}
       </HeartListContainer>

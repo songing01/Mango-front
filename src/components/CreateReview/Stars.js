@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { ReactComponent as FilledStar } from "../../assets/star_vector.svg";
-import { ReactComponent as UnfilledStar } from "../../assets/ic_starscore.svg";
+import { useEffect, useState } from "react";
+import { ReactComponent as FilledStar } from "../../assets/icon/createreviewicon/star_vector.svg";
+import { ReactComponent as UnfilledStar } from "../../assets/icon/createreviewicon/ic_starscore.svg";
 const Stars = ({ setStar }) => {
   const [clicked, setClicked] = useState([false, false, false, false, false]);
 
@@ -13,7 +13,10 @@ const Stars = ({ setStar }) => {
     }
     setClicked(clickStates);
   };
-  setStar(clicked.filter(Boolean).length);
+  useEffect(() => {
+    setStar(clicked.filter(Boolean).length);
+  }, [clicked]);
+
   return (
     <>
       {array.map(el =>

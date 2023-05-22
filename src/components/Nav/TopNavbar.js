@@ -6,6 +6,9 @@ import leftarrow from "../../assets/icon/topnavbar/ic_left.png";
 import user from "../../assets/icon/topnavbar/ic_user.png";
 // component
 import Sidebar from "./SideBar";
+// api
+import { GetMyHeartListAPI } from "../../api/heart";
+import { GetUserInfo } from "../../api/user";
 
 /** ⭐ 사용 예시
  * <TopNavbar noTitle />
@@ -17,27 +20,60 @@ import Sidebar from "./SideBar";
  *  2. title : 중앙에 들어가는 굵은 글씨 타이틀
  *  3. subTitle : title 밑에 들어가는 서브 텍스트
  *  4. subTitleColor : subTitle의 색상코드. 디폴트는 색상은 #151515
+ *  5. updateTime : 찜 리스트 요청 시간. updateTime이 달라질 때 마다 찜 목록 업데이트
  */
 
-const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
-  const [sidebarOpen, setSideberOpen] = useState(false);
+const TopNavbar = ({ noTitle, title, subTitle, subTitleColor, updateTime }) => {
+  const [sidebarOpen, setSideberOpen] = useState(false); // 사이드바 open 여부
+  const [heartList, setHeartList] = useState([]); // 찜 목록
+  const [userInfo, setUserInfo] = useState(null);
 
-  const sidebarRef = useRef(null);
+  const sidebarRef = useRef(null); // 사이드바 dom
 
+  /** 사이드바 닫기 함수*/
   const _handleCloseSidebar = e => {
     if (!sidebarRef.current?.contains(e.target)) {
       return setSideberOpen(false);
     }
   };
 
-  useEffect(() => {
-    document.addEventListener("click", _handleCloseSidebar, true);
-    return () => {
-      document.removeEventListener("click", _handleCloseSidebar, true);
-    };
-  });
+  /** 사이드바 열기 함수 */
+  const _handleOpenSidebar = () => {
+    setSideberOpen(true);
+  };
 
-  /** 스크롤 방지 */
+  /** 유저 정보 불러오는 비동기 함수 */
+  const _reqGetUserInfo = async () => {
+    const res = await GetUserInfo();
+    console.log(res);
+    setUserInfo(res);
+  };
+
+  /** 내 찜 목록 불러오는 비동기 함수 */
+  const _reqGetMyHeartsList = async () => {
+    const res = await GetMyHeartListAPI();
+    console.log("찜목록", res);
+    setHeartList(res);
+  };
+
+  useEffect(() => {
+    // 뒷 배경 클릭 시 자동으로 사이드바 닫힘
+    document.addEventListener("click", _handleCloseSidebar, true);
+    // 유저 정보 불러오기
+    _reqGetUserInfo();
+
+    return () => {
+      document.removeEventListener("click", _handleCloseSidebar, true); // clean up
+    };
+  }, []);
+
+  useEffect(() => {
+    // 찜 목록 불러오기
+    _reqGetMyHeartsList();
+    console.log("찜 목록 요청");
+  }, [updateTime]);
+
+  /** 사이드바 열었을 때 배경 스크롤 방지 */
   useEffect(() => {
     if (sidebarOpen) {
       console.log("스크롤방지");
@@ -46,10 +82,6 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
       document.getElementById("root").style.overflow = "unset";
     }
   }, [sidebarOpen]);
-
-  const _handleOpenSidebar = () => {
-    setSideberOpen(true);
-  };
 
   return (
     <NavDiv noTitle={noTitle}>
@@ -68,7 +100,7 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor }) => {
         <img src={user} className="user" onClick={_handleOpenSidebar} />
       </IconsBox>
 
-      <Sidebar isOpen={sidebarOpen} />
+      <Sidebar isOpen={sidebarOpen} heartList={heartList} userInfo={userInfo} />
     </NavDiv>
   );
 };
