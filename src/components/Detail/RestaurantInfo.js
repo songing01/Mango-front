@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Star from "../../assets/icon/detailbuttonbox/ic_star.png";
 import WatchReview from "../../assets/icon/detailbuttonbox/ic_message.png";
 import WriteReview from "../../assets/icon/detailbuttonbox/ic_write.png";
-import Heart from "../../assets/icon/detailbuttonbox/ic_heart.png";
 import { ReactComponent as DibsT } from "../../assets/icon/listicon/heartfill_vector.svg";
 import { ReactComponent as DibsF } from "../../assets/icon/listicon/heart_vector.svg";
 import { PostMyHeartListAPI, DeleteMyHeartListAPI } from "../../api/heart";
@@ -177,6 +176,11 @@ const Map = styled.div`
   width: 90%;
   aspect-ratio: 1/1;
   margin-top: 10px;
+
+  @media (min-width: 500px) {
+    aspect-ratio: unset;
+    height: 300px;
+  }
 `;
 
 const IconButtons = styled.div`

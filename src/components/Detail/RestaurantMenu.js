@@ -10,8 +10,6 @@ const RestaurantMenu = ({averagePrice, storeId}) => {
   // storeId, category를 바탕으로 서버에서 메뉴 데이터 가져오기
   const getMenuCategory = async (storeId, category) => {
     const menuData = await GetStoreMenuAPI(storeId, category);
-    console.log("테스트!!");
-    console.log(menuData);
     setCategoryMenu(menuData);
   };
 
