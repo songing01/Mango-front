@@ -31,3 +31,13 @@ export const PostReviewAPI = async (
     console.log("에러 발생", err);
   }
 };
+
+
+export const GetReviewAPI = async (storeId, sortType) => {
+  try {
+    const res = await client.get(`/reviews/list?storeId=${storeId}&sortType=${sortType}`);
+    return res.data;
+  } catch (err) {
+    console.log("에러 발생", err);
+  }
+};

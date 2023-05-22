@@ -12,7 +12,7 @@ const ReviewPage = () => {
       {/* 별점 부분 */}
       <StarRate storeId = {storeId}/>
       {/* 리뷰 부분 */}
-      <ReviewResult />
+      <ReviewResult storeId = {storeId}/>
     </Div>
   );
 };
