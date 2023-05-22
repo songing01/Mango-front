@@ -42,17 +42,24 @@ const ReviewTemplate = ({ storeId }) => {
     navigate(`/review/${storeId}`);
   };
   const postReview = async () => {
-    console.log("ImgFile:", imgFile);
-    let hasImage = false;
-    if (imgFile) {
-      hasImage = true;
+    if (star != 0 && title && detail) {
+      let hasImage = false;
+      if (imgFile) {
+        hasImage = true;
+      }
+      await PostReviewAPI(storeId, star, title, detail, hasImage, imgFile);
+      navigateToReview();
+    } else if (star == 0) {
+      alert("별을 하나 이상 눌러주세요.");
+    } else if (title == "") {
+      alert("리뷰 제목을 작성해 주세요.");
+    } else if (detail == "") {
+      alert("상세 리뷰를 작성해 주세요.");
     }
-    console.log(hasImage);
-    console.log(imgFile);
-    await PostReviewAPI(storeId, star, title, detail, hasImage, imgFile);
-    navigateToReview();
   };
-
+  const style = {
+    display: "flex",
+  };
   return (
     <div>
       <Wrapper>
@@ -77,7 +84,7 @@ const ReviewTemplate = ({ storeId }) => {
           />
         </InputBox>
         <AddPhotoButton>
-          <label for="file">
+          <label htmlFor="file" style={style}>
             <CircleAdd height={"16px"} width={"16px"} />
             <PhotoText>사진 첨부하기</PhotoText>
           </label>
@@ -130,7 +137,7 @@ const PhotoContainer = styled.div`
   position: relative;
   margin: 16px;
 `;
-const StarText = styled.text`
+const StarText = styled.div`
   height: 19px;
   margin-bottom: 20px;
 
@@ -183,7 +190,7 @@ const AddPhotoButton = styled.div`
   display: flex;
   align-items: center;
 `;
-const PhotoText = styled.text`
+const PhotoText = styled.div`
   height: 16px;
   margin-left: 4px;
 

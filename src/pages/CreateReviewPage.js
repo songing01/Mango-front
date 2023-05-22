@@ -14,7 +14,4 @@ const CreateReviewPage = () => {
   );
 };
 
-const Wrapper = styled.div`
-  padding-bottom: 32px;
-`;
 export default CreateReviewPage;
