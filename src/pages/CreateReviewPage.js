@@ -1,15 +1,13 @@
 import styled from "styled-components";
 import BarUp from "../components/Button/BarUp";
 import ReviewTemplate from "../components/CreateReview/ReviewTemplate";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import TopNavbar from "../components/Nav/TopNavbar";
 const CreateReviewPage = () => {
-  const location = useLocation();
-  //const storeId = location.state.storeId;
-  //const name = location.state.name;
-  const storeId = 1; //임시
-  const name = "식당명"; //임시
-  console.log(location.state);
+  //const { storeId, name } = useParams();
+  const storeId = 1;
+  const name = "식당명";
+  console.log(storeId);
   return (
     <div>
       <TopNavbar title="리뷰 쓰기" subTitle={name} subTitleColor="#151515" />
