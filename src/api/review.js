@@ -1,4 +1,5 @@
 import client from "./client";
+
 export const PostReviewAPI = async (
   storeId,
   star,
@@ -17,8 +18,8 @@ export const PostReviewAPI = async (
 
   try {
     const formData = new FormData();
+
     formData.append("image", imgFile);
-    console.log(imgFile);
     formData.append(
       "dto",
       new Blob([JSON.stringify(data)], { type: "application/json" }),

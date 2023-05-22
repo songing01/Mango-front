@@ -7,11 +7,12 @@ import { useImperativeHandle, useState } from "react";
 import { useRef } from "react";
 import axios from "axios";
 import { PostReviewAPI } from "../../api/review";
+import { useNavigate } from "react-router-dom";
 const ReviewTemplate = ({ storeId }) => {
   const [star, setStar] = useState();
   const [inputs, setInputs] = useState({ title: "", detail: "" });
 
-  const [imgShow, setImgShow] = useState();
+  const [imgShow, setImgShow] = useState(null);
   const imgRef = useRef();
 
   const { title, detail } = inputs;
@@ -36,13 +37,20 @@ const ReviewTemplate = ({ storeId }) => {
     setImgShow();
     setImgFile();
   };
+  const navigate = useNavigate();
+  const navigateToReview = () => {
+    navigate(`/review/${storeId}`);
+  };
   const postReview = async () => {
     console.log("ImgFile:", imgFile);
     let hasImage = false;
     if (imgFile) {
       hasImage = true;
     }
+    console.log(hasImage);
+    console.log(imgFile);
     await PostReviewAPI(storeId, star, title, detail, hasImage, imgFile);
+    navigateToReview();
   };
 
   return (
