@@ -42,3 +42,11 @@ export const GetReviewAPI = async (storeId, sortType) => {
     console.log("에러 발생", err);
   }
 };
+
+export const DeleteMyReviewAPI = async reviewId => {
+  try {
+    await client.delete(`/reviews/${reviewId}`);
+  } catch (err) {
+    console.log("에러 발생", err);
+  }
+};
