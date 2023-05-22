@@ -6,9 +6,7 @@ import logo from "../assets/logo/logo.png";
 import KakaoBtn from "../components/Button/KakaoBtn";
 
 const LoginPage = () => {
-  const navigate = useNavigate();
-
-  const CLIENT_MAIN_URL = "http://localhost:3000";
+  const CLIENT_MAIN_URL = process.env.REACT_APP_REACT_URL;
 
   const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
 
@@ -17,7 +15,6 @@ const LoginPage = () => {
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   const _handleKakaoLogin = () => {
-    console.log("카카오로그인 버튼 클릭");
     window.location.href = KAKAO_AUTH_URL;
   };
 
