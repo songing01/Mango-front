@@ -15,6 +15,8 @@ const ListPage = () => {
   //검색어
   const [keyword, setKeyword] = useState("");
 
+  const [time, setTime] = useState();
+
   const getData = async () => {
     const res = await GetLocalStoreListAPI();
     console.log(res);
@@ -40,7 +42,12 @@ const ListPage = () => {
 
   return (
     <div>
-      <TopNavbar title="내 위치" subTitle="신촌" subTitleColor="#15D0F9" />
+      <TopNavbar
+        title="내 위치"
+        subTitle="신촌"
+        subTitleColor="#15D0F9"
+        updateTime={time}
+      />
       <Wrapper>
         <SearchForm
           onSubmit={e => {
@@ -56,6 +63,7 @@ const ListPage = () => {
             setData={setData}
             dibsData={dibsData}
             setDibsData={setDibsData}
+            setTime={setTime}
           />
         )}{" "}
       </Wrapper>

@@ -18,6 +18,7 @@ const Store = ({
   store,
   dibsData,
   setDibsData,
+  setTime,
 }) => {
   const [dibs, setDibs] = useState();
   useEffect(() => {
@@ -51,10 +52,12 @@ const Store = ({
     if (dibs) {
       const res = await PostMyHeartListAPI(Id);
       await getDibsData();
+      setTime(new Date());
     } else {
       await DeleteMyHeartListAPI(Id);
       const res = await getDibsData();
       console.log("랄라", res);
+      setTime(new Date());
     }
   };
   const navigate = useNavigate();
