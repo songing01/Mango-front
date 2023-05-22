@@ -1,14 +1,7 @@
 import styled from "styled-components";
 import Store from "./Store";
 
-const StoreList = ({
-  stores,
-  data,
-  setData,
-  dibsData,
-  setDibsData,
-  setTime,
-}) => {
+const StoreList = ({ stores, setData, dibsData, setDibsData, setTime }) => {
   return (
     <ListBlock>
       {stores &&

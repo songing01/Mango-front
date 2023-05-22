@@ -3,10 +3,10 @@ import StoreList from "../components/List/StoreList";
 import SearchBox from "../components/List/SearchBox";
 import BarUp from "../components/Button/BarUp";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { GetMyHeartListAPI } from "../api/heart";
 import { GetSearchedStoreListAPI, GetLocalStoreListAPI } from "../api/store";
 import TopNavbar from "../components/Nav/TopNavbar";
+
 const ListPage = () => {
   //보여줄 가게 데이터
   const [data, setData] = useState([]);
@@ -73,7 +73,7 @@ const ListPage = () => {
         {data && (
           <StoreList
             stores={data}
-            data={data} //수정해야할듯
+            data={data}
             setData={setData}
             dibsData={dibsData}
             setDibsData={setDibsData}

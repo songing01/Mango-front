@@ -22,7 +22,6 @@ const Store = ({
 }) => {
   const [dibs, setDibs] = useState();
   useEffect(() => {
-    console.log("아아", dibsData);
     dibsData &&
       dibsData.map(data => (data.name === store.name ? setDibs(true) : data));
   }, [dibsData]);
@@ -36,14 +35,14 @@ const Store = ({
     setDibs(!dibs);
   };
 
-  const useDidMountEffect = (func, deps) => {
+  const useDidMountEffect = func => {
     const didMount = useRef(false);
-
     useEffect(() => {
       if (didMount.current) func();
       else didMount.current = true;
     }, [dibs]);
   };
+
   useDidMountEffect(() => {
     updateDibs();
   }, [dibs]);
@@ -56,7 +55,6 @@ const Store = ({
     } else {
       await DeleteMyHeartListAPI(Id);
       const res = await getDibsData();
-      console.log("랄라", res);
       setTime(new Date());
     }
   };
@@ -93,10 +91,8 @@ const Store = ({
 };
 
 const StoreBlock = styled.div`
-  /*width: 358px;*/
   height: 120px;
 
-  /* lightgrey */
   background: #f4f4f4;
 
   border-radius: 32px;
@@ -106,18 +102,11 @@ const StoreBlock = styled.div`
   &:active {
     background: #fff2de;
   }
-
-  //hover일때는 컬러 적용아닌거 맞는지... 디자인에 여쭤보기...
-  /*
-  &:hover {
-    background: #fff2de;
-  }*/
 `;
 const Image = styled.img`
   width: 92px;
   height: 92px;
 
-  /* midgrey */
   background: #a2a2a2;
   border-radius: 20px;
 
@@ -126,35 +115,24 @@ const Image = styled.img`
   margin-bottom: 14px;
 `;
 const Title = styled.div`
-  /*width: 70.39px;*/
   height: 24px;
-
-  /* bold20 */
 
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  /* identical to box height */
-
-  /* lessblack */
 
   color: #151515;
 `;
 const Location = styled.div`
-  /*width: 128.72px;*/
   height: 12px;
-
-  /* bold12 */
 
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 700;
   font-size: 12px;
   line-height: 14px;
-
-  /* midgrey */
 
   color: #a2a2a2;
 
@@ -163,15 +141,11 @@ const Location = styled.div`
 const Info = styled.div`
   height: 14px;
 
-  /* bold12 */
-
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 700;
   font-size: 12px;
   line-height: 14px;
-
-  /* lessblack */
 
   color: #151515;
   display: flex;
@@ -192,18 +166,14 @@ const AvgPrice = styled.div`
 const Rating = styled.div`
   width: 20px;
   height: 34px;
-  /* bold8 */
 
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 700;
   font-size: 8px;
   line-height: 10px;
-  /* identical to box height */
 
   text-align: center;
-
-  /* lessblack */
 
   color: #151515;
 `;

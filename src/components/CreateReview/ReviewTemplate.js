@@ -3,11 +3,11 @@ import { ReactComponent as CircleAdd } from "../../assets/icon/createreviewicon/
 import { ReactComponent as ReviewFinish } from "../../assets/icon/createreviewicon/review_finish.svg";
 import { ReactComponent as DeletePhotoButton } from "../../assets/icon/createreviewicon/ic_closeImage.svg";
 import Stars from "./Stars";
-import { useImperativeHandle, useState } from "react";
+import { useState } from "react";
 import { useRef } from "react";
-import axios from "axios";
 import { PostReviewAPI } from "../../api/review";
 import { useNavigate } from "react-router-dom";
+
 const ReviewTemplate = ({ storeId }) => {
   const [star, setStar] = useState();
   const [inputs, setInputs] = useState({ title: "", detail: "" });
@@ -112,7 +112,6 @@ const Wrapper = styled.div`
 const InputBox = styled.div`
   height: 240px;
   width: 100%;
-  /* lightgrey */
 
   background: #f4f4f4;
   border-radius: 20px;
@@ -135,16 +134,11 @@ const StarText = styled.text`
   height: 19px;
   margin-bottom: 20px;
 
-  /* bold16 */
-
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
-  /* identical to box height */
-
-  /* lessblack */
 
   color: #151515;
 `;
@@ -154,16 +148,11 @@ const Title = styled.input`
   border: none;
   background: #f4f4f4;
 
-  /* bold16 */
-
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
-  /* identical to box height */
-
-  /* lessblack */
 
   color: #151515;
   &:focus {
@@ -171,7 +160,6 @@ const Title = styled.input`
   }
 `;
 const Detail = styled.textarea`
-  /* reg12 */
   margin: 0px 16px 16px 16px;
   height: 100%;
   border: none;
@@ -183,8 +171,6 @@ const Detail = styled.textarea`
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
-
-  /* lessblack */
 
   color: #151515;
   &:focus {
@@ -199,8 +185,6 @@ const AddPhotoButton = styled.div`
 `;
 const PhotoText = styled.text`
   height: 16px;
-
-  /* bold16 */
   margin-left: 4px;
 
   font-family: "Pretendard";
@@ -208,9 +192,6 @@ const PhotoText = styled.text`
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
-  /* identical to box height */
-
-  /* lessblack */
 
   color: #151515;
 `;

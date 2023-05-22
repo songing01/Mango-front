@@ -13,7 +13,7 @@ const CreateReviewPage = () => {
     </div>
   );
 };
-//BarUp 높이 만큼 padding
+
 const Wrapper = styled.div`
   padding-bottom: 32px;
 `;
