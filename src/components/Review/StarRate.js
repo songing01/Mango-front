@@ -1,33 +1,62 @@
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import { ReactComponent as FilledStar } from "../../assets/star_vector.svg";
+import { GetStoreDetailAPI } from "../../api/store";
 
-const StarRate = () => {
-  const starRate = [
-    {id : 5, star : 50},
-    {id : 4, star : 20},
-    {id : 3, star : 15},
-    {id : 2, star : 5},
-    {id : 1, star : 10},
-  ];
+const StarRate = ({storeId}) => {
+
+  // 가게 상세 정보 데이터
+  const [storeDetail, setstoreDetail] = useState({});
+  
+  // api로부터 받아온 starCount 별점 배열
+  const [starCount, setStarCount] = useState([]);
+
+  // starCount 배열 요소 sum 값 - progress bar 길이 계산 용도
+  const [totalElementSum, setTotalElementSum] = useState(0);
+
+  // 가게 정보 아이디로 서버에서 가게 정보 알아오기
+  const getStorestoreDetailData = async (storeId) => {
+    if (storeId) {
+        const res = await GetStoreDetailAPI(storeId);
+        console.log(res);
+        setstoreDetail(res);
+    }
+  };
+
+  ;
+
+  useEffect(() => {
+      getStorestoreDetailData(storeId);
+    }, [storeId]);
+
+  useEffect(() => {
+    if (storeDetail.starCount) {
+      const countArray = storeDetail.starCount.split('|').map(Number);
+      setStarCount(countArray.reverse());
+      const sum = countArray.reduce((acc, curr) => acc + curr, 0);
+      setTotalElementSum(sum);
+    }
+  }, [storeDetail]);
+
   return (
     <>
       <StarRateInfo>
         {/* 평균 별점 */}
         <StarAverage>
           <FilledStar width={"36px"} height={"36px"}/>
-          <AverageText>0.0</AverageText>
+          <AverageText>{storeDetail.starAverage}</AverageText>
         </StarAverage>
 
         {/* 퍼센트 부분 */}
         <div className="score" style={{display: "flex", flexDirection: "column", gap: "8px"}}>
-          {starRate.map((element, index) => {
+          {starCount.map((element, index) => {
             return(
-              <div style={{display: "flex", alignItems: "center"}}>
-                <ProgressText color="#151515">{element.id}점</ProgressText>
+              <div style={{display: "flex", alignItems: "center"}} key={index}>
+                <ProgressText color="#151515">{5 - index}점</ProgressText>
                 <ProgressBar>
-                  <ProgressPercentage width={(152 * element.star/100)+"px"} />
+                  <ProgressPercentage width={(152 * element/totalElementSum)+"px"} />
                 </ProgressBar>
-                <ProgressText color="#A2A2A2">{element.star}%</ProgressText>
+                <ProgressText color="#A2A2A2">{element}개</ProgressText>
               </div>
               );
           })}
@@ -86,4 +115,4 @@ const ProgressText = styled.span`
   font-size: 8px;
   line-height: 10px;
   color: ${(props) => props.color};
-  `;
+`;
