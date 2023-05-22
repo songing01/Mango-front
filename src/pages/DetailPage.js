@@ -39,7 +39,10 @@ const DetailPage = () => {
                 operationHours = {storeData.operationHours}
                 phone = {storeData.phone}
                 isParking = {storeData.isParking}/>
-            <RestaurantMenu />
+            <RestaurantMenu 
+                averagePrice = {storeData.averagePrice}
+                storeId = {storeId}
+            />
         </Div>
     );
 };

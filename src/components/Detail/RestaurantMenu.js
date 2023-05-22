@@ -1,27 +1,77 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
+import { GetStoreMenuAPI } from '../../api/menu';
 
-const RestaurantMenu = () => {
+const RestaurantMenu = ({averagePrice, storeId}) => {
+
+  // 현재 카테고리가 무엇인지에 대한 데이터
+  const [category, setCategory] = useState("식사류");
+
+  // storeId, category를 바탕으로 서버에서 메뉴 데이터 가져오기
+  const getMenuCategory = async (storeId, category) => {
+    const menuData = await GetStoreMenuAPI(storeId, category);
+    console.log("테스트!!");
+    console.log(menuData);
+    setCategoryMenu(menuData);
+  };
+
+  // storeId와 category가 바뀔 때마다 데이터 가져오기
+  useEffect(() => {
+    getMenuCategory(storeId, category);
+  }, [storeId, category]);
+
+  // 요청한 카테고리에 대한 메뉴 데이터
+  const [categoryMenu, setCategoryMenu] = useState([]);
+
+  
+  // 가격에 콤마 붙이는 함수
+  const addPriceComma = (price) => {
+    const formattedPrice = price ? price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "";
+    return formattedPrice;
+  };
+
   return (
     <>
         <MenuTitle>
             <Menu>메뉴</Menu>
-            <PersonPrice>인당 약 &#8361;00,000</PersonPrice>
+            <PersonPrice>인당 약 &#8361;{addPriceComma(averagePrice)}</PersonPrice>
         </MenuTitle>
 
         <MenuTypeToggle>
-            <span>식사류</span>
-            <span>세트메뉴</span>
-            <span>사이드</span>
-            <span>음료</span>
+            <MenuType 
+                active = {category === "식사류"}
+                onClick={() => setCategory("식사류")}>
+                    식사류
+            </MenuType>
+            <MenuType 
+                active = {category === "세트메뉴"}
+                onClick={() => setCategory("세트메뉴")}>
+                    세트메뉴
+            </MenuType>
+            <MenuType 
+                active = {category === "사이드"}
+                onClick={() => setCategory("사이드")}>
+                    사이드
+            </MenuType>
+            <MenuType 
+                active = {category === "음료"}
+                onClick={() => setCategory("음료")}>
+                    음료
+            </MenuType>
         </MenuTypeToggle>
             
-        {/* 식당 메뉴 부분 -> 추후 컴포넌트로 분리 예정 */}
-        <FoodItem>
-            <FoodImage></FoodImage>
-            <FoodText>음식이름</FoodText>
-            <FoodText style={{color:"#A2A2A2"}}>&#8361; 00,000</FoodText>
-        </FoodItem>  
+        {/* 식당 메뉴 부분 -> 식사류 default, 음료 클릭 시 음료에 해당하는 배열 반복하기.. */}
+        <FoodList>
+            {categoryMenu.menus && categoryMenu.menus.map((menuitem, index) => {
+                return (
+                <FoodItem key={index}>
+                    <FoodImage src={menuitem.imageUrl} alt={menuitem.name} />
+                    <FoodText>{menuitem.name}</FoodText>
+                    <FoodText style={{ color: "#A2A2A2" }}>&#8361; {addPriceComma(menuitem.price)}</FoodText>
+                </FoodItem>
+                );
+            })}
+        </FoodList>
     </>
   );
 };
@@ -60,23 +110,39 @@ const MenuTypeToggle = styled.div`
     justify-content: flex-start;
     gap: 10px;
     margin-top: 8px;
-    
+`;
+
+const MenuType = styled.span`
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
     color: #A2A2A2;
+    color: ${props => (props.active ? "black" : "#A2A2A2")};
+    cursor: pointer;
+
+    &:hover {
+        color: black;
+    }
+`;
+
+const FoodList = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    justify-content: space-between;
 `;
 
 const FoodItem = styled.div`
     margin-top: 20px;
+    width: 30%;
 `;
 
-const FoodImage = styled.div`
+const FoodImage = styled.img`
     width: 112px;
     height: 112px;
-    background: #A2A2A2;
+    background: ${props => (props.src ? 'white' : '#A2A2A2')};
     border-radius: 20px;
 `;
 
