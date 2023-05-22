@@ -28,12 +28,26 @@ const ListPage = () => {
   };
 
   useEffect(() => {
-    getData();
-    getDibsData();
+    if (localStorage.getItem("mango-search")) {
+      setKeyword(localStorage.getItem("mango-search"));
+      getSearchedData(localStorage.getItem("mango-search"));
+      getDibsData();
+      localStorage.setItem("mango-search", "");
+    } else {
+      getData();
+      getDibsData();
+    }
   }, []);
 
-  const getSearchedData = async (keyword, e) => {
+  const submitKeyword = async (keyword, e) => {
     e.preventDefault();
+    if (keyword) {
+      const res = await GetSearchedStoreListAPI(keyword);
+      setData(res);
+    }
+  };
+
+  const getSearchedData = async keyword => {
     if (keyword) {
       const res = await GetSearchedStoreListAPI(keyword);
       setData(res);
@@ -51,7 +65,7 @@ const ListPage = () => {
       <Wrapper>
         <SearchForm
           onSubmit={e => {
-            getSearchedData(keyword, e);
+            submitKeyword(keyword, e);
           }}
         >
           <SearchBox keyword={keyword} setKeyword={setKeyword} />
