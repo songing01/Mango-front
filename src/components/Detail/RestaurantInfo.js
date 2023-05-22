@@ -1,14 +1,15 @@
-import React, { useState ,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import Star from '../../assets/icon/detailbuttonbox/ic_star.png';
 import WatchReview from '../../assets/icon/detailbuttonbox/ic_message.png';
 import WriteReview from '../../assets/icon/detailbuttonbox/ic_write.png';
 import Heart from '../../assets/icon/detailbuttonbox/ic_heart.png';
+import { useNavigate } from 'react-router-dom';
 
 const { kakao } = window;
 
 const RestaurantInfo = (
-    {name, address, starAverage, operationHours, phone, isParking}
+    {name, storeId, address, starAverage, operationHours, phone, isParking}
 ) => {
 
     function searchLocationByAddress(map, address, name) {
@@ -77,6 +78,15 @@ const RestaurantInfo = (
         
     }, [address, name]);
 
+    // Review로 넘어가는 함수
+    const navigate = useNavigate();
+    const navigateToReview = () => {
+        navigate(`/review/${storeId}`);
+    };
+    const navigateToCreateReview = () => {
+        navigate(`/create-review/${storeId}`);
+    };
+
 
     return (
         <>
@@ -86,11 +96,11 @@ const RestaurantInfo = (
                     <IconImage src={Star} alt="별점"/>
                     <IconDesc>{starAverage}</IconDesc>
                 </Icon>
-                <Icon>
+                <Icon onClick={navigateToReview}>
                     <IconImage src={WatchReview} alt="리뷰 보기"/>
                     <IconDesc>리뷰 보기</IconDesc>
                 </Icon> 
-                <Icon>
+                <Icon onClick={navigateToCreateReview}>
                     <IconImage src={WriteReview} alt="리뷰 쓰기"/> 
                     <IconDesc>리뷰 쓰기</IconDesc>
                 </Icon>
@@ -108,7 +118,7 @@ const RestaurantInfo = (
                 </Info>
                 <Info>
                     <span>주차가능여부</span>
-                    <span>{isParking == 1 ? "가능" : "불가능"}</span>
+                    <span>{isParking === 1 ? "가능" : "불가능"}</span>
                 </Info>
             </InfoList>
         </>

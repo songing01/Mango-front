@@ -28,12 +28,13 @@ const DetailPage = () => {
 
     useEffect(() => {
         getStoreDetailData(storeId);
-    }, []);
+    }, [storeId]);
 
     return (
         <Div>
             <RestaurantInfo 
                 name = {storeData.name}
+                storeId = {storeId}
                 address = {storeData.address}
                 starAverage = {storeData.starAverage}
                 operationHours = {storeData.operationHours}
