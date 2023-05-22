@@ -1,15 +1,11 @@
 import styled from "styled-components";
 import BarUp from "../components/Button/BarUp";
 import ReviewTemplate from "../components/CreateReview/ReviewTemplate";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import TopNavbar from "../components/Nav/TopNavbar";
 const CreateReviewPage = () => {
-  const location = useLocation();
-  //const storeId = location.state.storeId;
-  //const name = location.state.name;
-  const storeId = 1; //임시
-  const name = "식당명"; //임시
-  console.log(location.state);
+  const { storeId, name } = useParams();
+
   return (
     <div>
       <TopNavbar title="리뷰 쓰기" subTitle={name} subTitleColor="#151515" />
@@ -17,8 +13,5 @@ const CreateReviewPage = () => {
     </div>
   );
 };
-//BarUp 높이 만큼 padding
-const Wrapper = styled.div`
-  padding-bottom: 32px;
-`;
+
 export default CreateReviewPage;

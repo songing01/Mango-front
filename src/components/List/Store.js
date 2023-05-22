@@ -4,7 +4,6 @@ import { ReactComponent as DibsF } from "../../assets/icon/listicon/heart_vector
 import { ReactComponent as Star } from "../../assets/icon/listicon/star_vector.svg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
 import { PostMyHeartListAPI, DeleteMyHeartListAPI } from "../../api/heart";
 import { GetMyHeartListAPI } from "../../api/heart";
 const Store = ({
@@ -18,10 +17,11 @@ const Store = ({
   store,
   dibsData,
   setDibsData,
+  setTime,
 }) => {
   const [dibs, setDibs] = useState();
+
   useEffect(() => {
-    console.log("아아", dibsData);
     dibsData &&
       dibsData.map(data => (data.name === store.name ? setDibs(true) : data));
   }, [dibsData]);
@@ -32,34 +32,25 @@ const Store = ({
   };
 
   const toggleDibs = async () => {
-    setDibs(!dibs);
-  };
-
-  const useDidMountEffect = (func, deps) => {
-    const didMount = useRef(false);
-
-    useEffect(() => {
-      if (didMount.current) func();
-      else didMount.current = true;
-    }, [dibs]);
-  };
-  useDidMountEffect(() => {
     updateDibs();
-  }, [dibs]);
+  };
 
   const updateDibs = async () => {
-    if (dibs) {
-      const res = await PostMyHeartListAPI(Id);
+    if (!dibs) {
+      await PostMyHeartListAPI(Id);
       await getDibsData();
+      setTime(new Date());
+      setDibs(!dibs);
     } else {
       await DeleteMyHeartListAPI(Id);
-      const res = await getDibsData();
-      console.log("랄라", res);
+      await getDibsData();
+      setTime(new Date());
+      setDibs(!dibs);
     }
   };
   const navigate = useNavigate();
   const navigateToDetail = () => {
-    navigate(`/detail/${Id}`, { state: Id });
+    navigate(`/detail/${Id}`);
   };
 
   return (
@@ -90,10 +81,8 @@ const Store = ({
 };
 
 const StoreBlock = styled.div`
-  /*width: 358px;*/
   height: 120px;
 
-  /* lightgrey */
   background: #f4f4f4;
 
   border-radius: 32px;
@@ -103,18 +92,11 @@ const StoreBlock = styled.div`
   &:active {
     background: #fff2de;
   }
-
-  //hover일때는 컬러 적용아닌거 맞는지... 디자인에 여쭤보기...
-  /*
-  &:hover {
-    background: #fff2de;
-  }*/
 `;
 const Image = styled.img`
   width: 92px;
   height: 92px;
 
-  /* midgrey */
   background: #a2a2a2;
   border-radius: 20px;
 
@@ -123,35 +105,24 @@ const Image = styled.img`
   margin-bottom: 14px;
 `;
 const Title = styled.div`
-  /*width: 70.39px;*/
   height: 24px;
-
-  /* bold20 */
 
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  /* identical to box height */
-
-  /* lessblack */
 
   color: #151515;
 `;
 const Location = styled.div`
-  /*width: 128.72px;*/
   height: 12px;
-
-  /* bold12 */
 
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 700;
   font-size: 12px;
   line-height: 14px;
-
-  /* midgrey */
 
   color: #a2a2a2;
 
@@ -160,15 +131,11 @@ const Location = styled.div`
 const Info = styled.div`
   height: 14px;
 
-  /* bold12 */
-
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 700;
   font-size: 12px;
   line-height: 14px;
-
-  /* lessblack */
 
   color: #151515;
   display: flex;
@@ -189,18 +156,14 @@ const AvgPrice = styled.div`
 const Rating = styled.div`
   width: 20px;
   height: 34px;
-  /* bold8 */
 
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 700;
   font-size: 8px;
   line-height: 10px;
-  /* identical to box height */
 
   text-align: center;
-
-  /* lessblack */
 
   color: #151515;
 `;

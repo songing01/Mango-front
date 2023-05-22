@@ -3,10 +3,10 @@ import StoreList from "../components/List/StoreList";
 import SearchBox from "../components/List/SearchBox";
 import BarUp from "../components/Button/BarUp";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { GetMyHeartListAPI } from "../api/heart";
 import { GetSearchedStoreListAPI, GetLocalStoreListAPI } from "../api/store";
 import TopNavbar from "../components/Nav/TopNavbar";
+
 const ListPage = () => {
   //보여줄 가게 데이터
   const [data, setData] = useState([]);
@@ -15,9 +15,10 @@ const ListPage = () => {
   //검색어
   const [keyword, setKeyword] = useState("");
 
+  const [time, setTime] = useState();
+
   const getData = async () => {
     const res = await GetLocalStoreListAPI();
-    console.log(res);
     setData(res);
   };
   const getDibsData = async () => {
@@ -26,12 +27,26 @@ const ListPage = () => {
   };
 
   useEffect(() => {
-    getData();
-    getDibsData();
+    if (localStorage.getItem("mango-search")) {
+      setKeyword(localStorage.getItem("mango-search"));
+      getSearchedData(localStorage.getItem("mango-search"));
+      getDibsData();
+      localStorage.setItem("mango-search", "");
+    } else {
+      getData();
+      getDibsData();
+    }
   }, []);
 
-  const getSearchedData = async (keyword, e) => {
+  const submitKeyword = async (keyword, e) => {
     e.preventDefault();
+    if (keyword) {
+      const res = await GetSearchedStoreListAPI(keyword);
+      setData(res);
+    }
+  };
+
+  const getSearchedData = async keyword => {
     if (keyword) {
       const res = await GetSearchedStoreListAPI(keyword);
       setData(res);
@@ -40,11 +55,16 @@ const ListPage = () => {
 
   return (
     <div>
-      <TopNavbar title="내 위치" subTitle="신촌" subTitleColor="#15D0F9" />
+      <TopNavbar
+        title="내 위치"
+        subTitle="신촌"
+        subTitleColor="#15D0F9"
+        updateTime={time}
+      />
       <Wrapper>
         <SearchForm
           onSubmit={e => {
-            getSearchedData(keyword, e);
+            submitKeyword(keyword, e);
           }}
         >
           <SearchBox keyword={keyword} setKeyword={setKeyword} />
@@ -52,10 +72,11 @@ const ListPage = () => {
         {data && (
           <StoreList
             stores={data}
-            data={data} //수정해야할듯
+            data={data}
             setData={setData}
             dibsData={dibsData}
             setDibsData={setDibsData}
+            setTime={setTime}
           />
         )}{" "}
       </Wrapper>

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 // assets
 import hamburger from "../../assets/icon/topnavbar/ic_hamburger.png";
 import leftarrow from "../../assets/icon/topnavbar/ic_left.png";
@@ -29,6 +30,7 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor, updateTime }) => {
   const [userInfo, setUserInfo] = useState(null);
 
   const sidebarRef = useRef(null); // 사이드바 dom
+  const navigate = useNavigate();
 
   /** 사이드바 닫기 함수*/
   const _handleCloseSidebar = e => {
@@ -45,15 +47,18 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor, updateTime }) => {
   /** 유저 정보 불러오는 비동기 함수 */
   const _reqGetUserInfo = async () => {
     const res = await GetUserInfo();
-    console.log(res);
     setUserInfo(res);
   };
 
   /** 내 찜 목록 불러오는 비동기 함수 */
   const _reqGetMyHeartsList = async () => {
     const res = await GetMyHeartListAPI();
-    console.log("찜목록", res);
     setHeartList(res);
+  };
+
+  /** 뒤로가기 버튼 함수 */
+  const _handleClickGotoBack = () => {
+    navigate(-1);
   };
 
   useEffect(() => {
@@ -70,13 +75,11 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor, updateTime }) => {
   useEffect(() => {
     // 찜 목록 불러오기
     _reqGetMyHeartsList();
-    console.log("찜 목록 요청");
   }, [updateTime]);
 
   /** 사이드바 열었을 때 배경 스크롤 방지 */
   useEffect(() => {
     if (sidebarOpen) {
-      console.log("스크롤방지");
       document.getElementById("root").style.overflow = "hidden";
     } else {
       document.getElementById("root").style.overflow = "unset";
@@ -87,7 +90,11 @@ const TopNavbar = ({ noTitle, title, subTitle, subTitleColor, updateTime }) => {
     <NavDiv noTitle={noTitle}>
       {!noTitle && (
         <>
-          <img src={leftarrow} className="leftarrow" />
+          <img
+            src={leftarrow}
+            className="leftarrow"
+            onClick={_handleClickGotoBack}
+          />
           <Title subTitleColor={subTitleColor}>
             <p className="big-title">{title}</p>
             <p className="sub-title">{subTitle}</p>

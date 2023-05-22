@@ -21,9 +21,9 @@ function App() {
       <Route element={<PrivateRoute />}>
         <Route path="/" element={<MainPage />} />
         <Route path="/list" element={<ListPage />} />
-        <Route path="/create-review" element={<CreateReviewPage />} />
+        <Route path="/create-review/:storeId/:name" element={<CreateReviewPage />} />
         <Route path="/detail/:storeId" element={<DetailPage />} />
-        <Route path="/review" element={<ReviewPage />} />
+        <Route path="/review/:storeId" element={<ReviewPage />} />
       </Route>
     </Routes>
   );

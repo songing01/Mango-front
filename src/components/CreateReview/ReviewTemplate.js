@@ -5,43 +5,61 @@ import { ReactComponent as DeletePhotoButton } from "../../assets/icon/createrev
 import Stars from "./Stars";
 import { useState } from "react";
 import { useRef } from "react";
-import axios from "axios";
 import { PostReviewAPI } from "../../api/review";
+import { useNavigate } from "react-router-dom";
+
 const ReviewTemplate = ({ storeId }) => {
   const [star, setStar] = useState();
   const [inputs, setInputs] = useState({ title: "", detail: "" });
 
-  const [imgFile, setImgFile] = useState();
+  const [imgShow, setImgShow] = useState(null);
   const imgRef = useRef();
 
-  const token = process.env.REACT_APP_REST_API_KEY;
   const { title, detail } = inputs;
 
+  const [imgFile, setImgFile] = useState();
   const handleChange = e => {
     const { value, name } = e.target;
     setInputs({ ...inputs, [name]: value });
   };
 
   const saveImgFile = () => {
-    const file = imgRef.current.files[0];
+    let file = imgRef.current.files[0];
+    setImgFile(file);
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      setImgFile(reader.result);
+      setImgShow(reader.result);
     };
   };
   const deletePhoto = () => {
     imgRef.current.value = "";
+    setImgShow();
     setImgFile();
   };
-  const postReview = async () => {
-    let hasImage = false;
-    if (imgFile) {
-      hasImage = true;
-    }
-    await PostReviewAPI(storeId, star, title, detail, hasImage, imgFile);
+  const navigate = useNavigate();
+  const navigateToReview = () => {
+    navigate(`/review/${storeId}`);
   };
-
+  const postReview = async () => {
+    if (star != 0 && title && detail) {
+      let hasImage = false;
+      if (imgFile) {
+        hasImage = true;
+      }
+      await PostReviewAPI(storeId, star, title, detail, hasImage, imgFile);
+      navigateToReview();
+    } else if (star == 0) {
+      alert("별을 하나 이상 눌러주세요.");
+    } else if (title == "") {
+      alert("리뷰 제목을 작성해 주세요.");
+    } else if (detail == "") {
+      alert("상세 리뷰를 작성해 주세요.");
+    }
+  };
+  const style = {
+    display: "flex",
+  };
   return (
     <div>
       <Wrapper>
@@ -66,7 +84,7 @@ const ReviewTemplate = ({ storeId }) => {
           />
         </InputBox>
         <AddPhotoButton>
-          <label for="file">
+          <label htmlFor="file" style={style}>
             <CircleAdd height={"16px"} width={"16px"} />
             <PhotoText>사진 첨부하기</PhotoText>
           </label>
@@ -80,9 +98,9 @@ const ReviewTemplate = ({ storeId }) => {
             ref={imgRef}
           />
         </AddPhotoButton>
-        {imgFile && (
+        {imgShow && (
           <PhotoContainer>
-            <Photo src={imgFile} />
+            <Photo src={imgShow} />
             <DeletePhotoButton
               onClick={deletePhoto}
               style={{ position: "absolute", top: "8px", left: "104px" }}
@@ -101,7 +119,6 @@ const Wrapper = styled.div`
 const InputBox = styled.div`
   height: 240px;
   width: 100%;
-  /* lightgrey */
 
   background: #f4f4f4;
   border-radius: 20px;
@@ -120,20 +137,15 @@ const PhotoContainer = styled.div`
   position: relative;
   margin: 16px;
 `;
-const StarText = styled.text`
+const StarText = styled.div`
   height: 19px;
   margin-bottom: 20px;
-
-  /* bold16 */
 
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
-  /* identical to box height */
-
-  /* lessblack */
 
   color: #151515;
 `;
@@ -143,16 +155,11 @@ const Title = styled.input`
   border: none;
   background: #f4f4f4;
 
-  /* bold16 */
-
   font-family: "Pretendard";
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
-  /* identical to box height */
-
-  /* lessblack */
 
   color: #151515;
   &:focus {
@@ -160,7 +167,6 @@ const Title = styled.input`
   }
 `;
 const Detail = styled.textarea`
-  /* reg12 */
   margin: 0px 16px 16px 16px;
   height: 100%;
   border: none;
@@ -173,8 +179,6 @@ const Detail = styled.textarea`
   font-size: 12px;
   line-height: 14px;
 
-  /* lessblack */
-
   color: #151515;
   &:focus {
     outline: none;
@@ -186,10 +190,8 @@ const AddPhotoButton = styled.div`
   display: flex;
   align-items: center;
 `;
-const PhotoText = styled.text`
+const PhotoText = styled.div`
   height: 16px;
-
-  /* bold16 */
   margin-left: 4px;
 
   font-family: "Pretendard";
@@ -197,9 +199,6 @@ const PhotoText = styled.text`
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
-  /* identical to box height */
-
-  /* lessblack */
 
   color: #151515;
 `;
