@@ -59,7 +59,7 @@ const Store = ({
   };
   const navigate = useNavigate();
   const navigateToDetail = () => {
-    navigate(`/detail/${Id}`, { state: Id });
+    navigate(`/detail/${Id}`);
   };
 
   return (
