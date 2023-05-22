@@ -5,14 +5,6 @@ import ic_user from "../../assets/icon/topnavbar/ic_user.png";
 import ic_heart from "../../assets/icon/topnavbar/ic_heart.png";
 
 const Sidebar = ({ isOpen, heartList, userInfo }) => {
-  // const test = {
-  //   heartId: 1,
-  //   memberId: 1,
-  //   storeId: 1,
-  //   name: "이펍떡볶이",
-  //   imageUrl: "https://efub/?img=14",
-  // };
-
   const navigate = useNavigate();
   const _handleGotoStore = storeId => {
     navigate(`/detail/${storeId}`);

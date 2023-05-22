@@ -1,10 +1,17 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 // asset
 import ic_pointer from "../../../assets/icon/nearbyBtn/ic_pointer.png";
 
 const NearbyBtn = () => {
+  const navigate = useNavigate();
+
+  const _handleGotoListpage = () => {
+    navigate("/list");
+  };
+
   return (
-    <Btn>
+    <Btn onClick={_handleGotoListpage}>
       <img src={ic_pointer} />
       <p>내 근처 식당 확인하기</p>
     </Btn>
