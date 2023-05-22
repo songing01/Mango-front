@@ -57,7 +57,9 @@ const ReviewTemplate = ({ storeId }) => {
       alert("상세 리뷰를 작성해 주세요.");
     }
   };
-
+  const style = {
+    display: "flex",
+  };
   return (
     <div>
       <Wrapper>
@@ -82,7 +84,7 @@ const ReviewTemplate = ({ storeId }) => {
           />
         </InputBox>
         <AddPhotoButton>
-          <label for="file">
+          <label htmlFor="file" style={style}>
             <CircleAdd height={"16px"} width={"16px"} />
             <PhotoText>사진 첨부하기</PhotoText>
           </label>
@@ -135,7 +137,7 @@ const PhotoContainer = styled.div`
   position: relative;
   margin: 16px;
 `;
-const StarText = styled.text`
+const StarText = styled.div`
   height: 19px;
   margin-bottom: 20px;
 
@@ -188,7 +190,7 @@ const AddPhotoButton = styled.div`
   display: flex;
   align-items: center;
 `;
-const PhotoText = styled.text`
+const PhotoText = styled.div`
   height: 16px;
   margin-left: 4px;
 
