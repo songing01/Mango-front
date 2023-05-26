@@ -14,6 +14,7 @@ const LoginPage = () => {
 
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
+  console.log(CLIENT_MAIN_URL, REST_API_KEY, REDIRECT_URI, KAKAO_AUTH_URL);
   const _handleKakaoLogin = () => {
     window.location.href = KAKAO_AUTH_URL;
   };
