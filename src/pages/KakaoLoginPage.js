@@ -7,8 +7,10 @@ import { SPRING_URL } from "../api/url";
 const KakaoLogin = () => {
   const location = useLocation();
   const KAKAO_CODE = location.search.split("=")[1]; // 인가코드
+  console.log("인가코드", KAKAO_CODE);
   const Spring = `${SPRING_URL}members/login/kakao?code=${KAKAO_CODE}`; // 토큰 요청
 
+  console.log("스프링 요청", Spring);
   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
