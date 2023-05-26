@@ -15,27 +15,16 @@ const ReviewResult = ({ storeId }) => {
     setSelectedOption(event.target.value);
   };
 
-  console.log(selectedOption);
-
   // storeId, selectedOption를 바탕으로 서버에서 메뉴 데이터 가져오기
   const getReview = async (storeId, selectedOption) => {
     const res = await GetReviewAPI(storeId, selectedOption);
-    console.log("요청한 리뷰 데이터");
-    console.log(res);
     setReviewData(res);
   };
 
   const getUserId = async () => {
     const res = await GetUserInfo();
-    console.log("유저 정보");
-    console.log(res.memberId);
     setUserId(res.memberId);
   }
-
-  const DeleteReview = async (reviewId) => {
-    await DeleteMyReviewAPI(reviewId);
-  }
-  
 
   // storeId와 selectedOption가 바뀔 때마다 데이터 가져오기
   useEffect(() => {
@@ -45,6 +34,22 @@ const ReviewResult = ({ storeId }) => {
   useEffect(() => {
     getUserId();
   }, []);
+
+  // 삭제 후 리뷰 데이터 get용으로 만든 함수
+  const updateReviewData = async () => {
+    await getReview(storeId, selectedOption);
+  };
+
+  // 리뷰 데이터 삭제 함수
+  const DeleteReview = async (reviewId, storeId, selectedOption) => {
+    await DeleteMyReviewAPI(reviewId);
+    await updateReviewData();
+  }
+
+  // 삭제 후 리뷰 데이터 실시간 반영
+  useEffect(() => {
+    updateReviewData();
+  }, [storeId, selectedOption]);
 
   return (
     <>
@@ -74,7 +79,7 @@ const ReviewResult = ({ storeId }) => {
                 </div>
               </div>
               <div style={{ display: "flex", alignItems: "flex-start" }}>
-                {review.memberId === userId ? <DeleteBtn onClick={() => {DeleteReview(review.reviewId)}}>삭제</DeleteBtn> : null}
+                {review.memberId === userId ? <DeleteBtn onClick={() => {DeleteReview(review.reviewId, storeId, selectedOption)}}>삭제</DeleteBtn> : null}
                 <div
                   style={{
                     display: "flex",

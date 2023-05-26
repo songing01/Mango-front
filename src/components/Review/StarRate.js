@@ -18,7 +18,6 @@ const StarRate = ({storeId}) => {
   const getStorestoreDetailData = async (storeId) => {
     if (storeId) {
         const res = await GetStoreDetailAPI(storeId);
-        console.log(res);
         setstoreDetail(res);
     }
   };
