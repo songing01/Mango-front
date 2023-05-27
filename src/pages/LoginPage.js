@@ -12,7 +12,9 @@ const LoginPage = () => {
 
   const REDIRECT_URI = encodeURI(`${CLIENT_MAIN_URL}/KakaoLogin`);
 
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+  const test = "https%3A%2F%2Fwww.mangoplate-clone.com%2FKakaoLogin";
+
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${test}&response_type=code`;
 
   console.log("메인uri", CLIENT_MAIN_URL);
   console.log("키", REST_API_KEY);
