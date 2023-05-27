@@ -10,7 +10,8 @@ const KakaoLogin = () => {
   console.log("인가코드", KAKAO_CODE);
   const Spring = `${SPRING_URL}members/login/kakao?code=${KAKAO_CODE}`; // 토큰 요청
 
-  console.log("스프링 요청", Spring);
+  console.log("스프링 요청 uri", Spring);
+  console.log("현재 위치", window.location);
   const navigate = useNavigate();
 
   axios.defaults.withCredentials = true;
@@ -31,7 +32,7 @@ const KakaoLogin = () => {
       console.log("카카오 로그인 에러.", err);
     });
 
-  return <Div></Div>;
+  return <Div>카카오 로그인 페이지 {window.location.href} </Div>;
 };
 
 export default KakaoLogin;
