@@ -32,7 +32,7 @@ const KakaoLogin = () => {
       console.log("카카오 로그인 에러.", err);
     });
 
-  return <Div></Div>;
+  return <Div>카카오 로그인 페이지 {window.location.href} </Div>;
 };
 
 export default KakaoLogin;
