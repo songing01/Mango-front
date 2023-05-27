@@ -10,7 +10,7 @@ const LoginPage = () => {
 
   const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
 
-  const REDIRECT_URI = `${CLIENT_MAIN_URL}/KakaoLogin`;
+  const REDIRECT_URI = encodeURI(`${CLIENT_MAIN_URL}/KakaoLogin`);
 
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
