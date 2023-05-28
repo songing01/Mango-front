@@ -50,7 +50,7 @@ const RestaurantInfo = ({
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
           content:
-            '<div style="width:150px;text-align:center;padding:6px 0;font-family:"Pretendard">' +
+            '<div style="width:150px;text-align:center;padding:6px 0;font-family:Pretendard">' +
             name +
             "</div>",
         });
@@ -121,7 +121,7 @@ const RestaurantInfo = ({
   // Review로 넘어가는 함수
   const navigate = useNavigate();
   const navigateToReview = () => {
-    navigate(`/review/${storeId}`);
+    navigate(`/review/${storeId}/${name}`);
   };
 
   // CreateReview로 넘어가는 함수

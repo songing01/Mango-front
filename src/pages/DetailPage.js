@@ -4,6 +4,8 @@ import RestaurantInfo from "../components/Detail/RestaurantInfo";
 import RestaurantMenu from "../components/Detail/RestaurantMenu";
 import { useParams } from "react-router-dom";
 import { GetStoreDetailAPI } from "../api/store";
+import TopNavbar from "../components/Nav/TopNavbar";
+import BarUp from "../components/Button/BarUp";
 
 // detail 페이지
 
@@ -28,6 +30,7 @@ const DetailPage = () => {
 
   return (
     <Div>
+      <TopNavbar title={storeData.name} subTitle={storeData.address} subTitleColor="#151515" />
       <RestaurantInfo
         name={storeData.name}
         storeId={storeId}
@@ -38,6 +41,7 @@ const DetailPage = () => {
         isParking={storeData.isParking}
       />
       <RestaurantMenu averagePrice={storeData.averagePrice} storeId={storeId} />
+      <BarUp isMain={false} />
     </Div>
   );
 };
