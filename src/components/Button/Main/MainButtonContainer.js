@@ -124,7 +124,7 @@ const IconBtn = styled.div`
   }
 
   .noodle {
-    max-width: 34px;
-    max-height: 34px;
+    max-width: 32px;
+    max-height: 32px;
   }
 `;
