@@ -9,7 +9,7 @@ const CreateReviewPage = () => {
   return (
     <div>
       <TopNavbar title="리뷰 쓰기" subTitle={name} subTitleColor="#151515" />
-      <ReviewTemplate storeId={storeId} />
+      <ReviewTemplate storeId={storeId} name={name} />
     </div>
   );
 };
