@@ -8,7 +8,7 @@ import { useRef } from "react";
 import { PostReviewAPI } from "../../api/review";
 import { useNavigate } from "react-router-dom";
 
-const ReviewTemplate = ({ storeId }) => {
+const ReviewTemplate = ({ storeId, name }) => {
   const [star, setStar] = useState();
   const [inputs, setInputs] = useState({ title: "", detail: "" });
 
@@ -39,7 +39,7 @@ const ReviewTemplate = ({ storeId }) => {
   };
   const navigate = useNavigate();
   const navigateToReview = () => {
-    navigate(`/review/${storeId}`);
+    navigate(`/review/${storeId}/${name}`);
   };
   const postReview = async () => {
     if (star != 0 && title && detail) {
