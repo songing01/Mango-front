@@ -4,7 +4,7 @@ import user from "../../assets/icon/topnavbar/ic_user.png";
 import { ReactComponent as FilledStar } from "../../assets/star_vector.svg";
 import { GetReviewAPI } from "../../api/review";
 import { GetUserInfo } from "../../api/user";
-import { DeleteMyReviewAPI } from "../../api/review"
+import { DeleteMyReviewAPI } from "../../api/review";
 
 const ReviewResult = ({ storeId }) => {
   const [selectedOption, setSelectedOption] = useState("LATEST");
@@ -24,7 +24,7 @@ const ReviewResult = ({ storeId }) => {
   const getUserId = async () => {
     const res = await GetUserInfo();
     setUserId(res.memberId);
-  }
+  };
 
   // storeId와 selectedOption가 바뀔 때마다 데이터 가져오기
   useEffect(() => {
@@ -44,7 +44,7 @@ const ReviewResult = ({ storeId }) => {
   const DeleteReview = async (reviewId, storeId, selectedOption) => {
     await DeleteMyReviewAPI(reviewId);
     await updateReviewData();
-  }
+  };
 
   // 삭제 후 리뷰 데이터 실시간 반영
   useEffect(() => {
@@ -61,44 +61,54 @@ const ReviewResult = ({ storeId }) => {
         </AlignDropDown>
       </ReviewTitle>
 
-      {/* 반복할 리뷰 아이템 */}
+      {/* 반복할 리뷰 아이템 - barup component 사이 간격 추가*/}
 
-      {reviewData.map((review, index) => {
-        return (
-          <ReviewItem key={index}>
-            <ReviewContent>
-              <div style={{ display: "flex", alignItems: "flex-start" }}>
-                <img
-                  src={user}
-                  style={{ width: "36px", marginRight: "16px" }}
-                  alt="유저 이미지"
-                />
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  <ReviewMainText>{review.title}</ReviewMainText>
-                  <ReviewSubText>{review.content}</ReviewSubText>
+      <div style={{marginBottom: "100px"}}>
+        {reviewData.map((review, index) => {
+          return (
+            <ReviewItem key={index}>
+              <ReviewContent>
+                <div style={{ display: "flex", alignItems: "flex-start" }}>
+                  <img
+                    src={user}
+                    style={{ width: "36px", marginRight: "16px" }}
+                    alt="유저 이미지"
+                  />
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <ReviewMainText>{review.title}</ReviewMainText>
+                    <ReviewSubText>{review.content}</ReviewSubText>
+                  </div>
                 </div>
-              </div>
-              <div style={{ display: "flex", alignItems: "flex-start" }}>
-                {review.memberId === userId ? <DeleteBtn onClick={() => {DeleteReview(review.reviewId, storeId, selectedOption)}}>삭제</DeleteBtn> : null}
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <FilledStar />
-                  <ReviewStarRateText>{review.star}</ReviewStarRateText>
+                <div style={{ display: "flex", alignItems: "flex-start" }}>
+                  {review.memberId === userId ? (
+                    <DeleteBtn
+                      onClick={() => {
+                        DeleteReview(review.reviewId, storeId, selectedOption);
+                      }}
+                    >
+                      삭제
+                    </DeleteBtn>
+                  ) : null}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <FilledStar />
+                    <ReviewStarRateText>{review.star}</ReviewStarRateText>
+                  </div>
                 </div>
-              </div>
-            </ReviewContent>
-            {/* 이미지 필요하면 넣기, 없으면 생략 */}
-            {review.hasImage === true && review.imageUrl != null ? (
-              <ReviewImage src={review.imageUrl} alt={review.title} />
-            ) : null}
-          </ReviewItem>
-        );
-      })}
+              </ReviewContent>
+              {/* 이미지 필요하면 넣기, 없으면 생략 */}
+              {review.hasImage === true && review.imageUrl != null ? (
+                <ReviewImage src={review.imageUrl} alt={review.title} />
+              ) : null}
+            </ReviewItem>
+          );
+        })}
+      </div>
     </>
   );
 };
@@ -193,7 +203,7 @@ const DeleteBtn = styled.button`
   border-radius: 32px;
   margin-right: 12px;
 
-  font-family: 'Pretendard';
+  font-family: "Pretendard";
   font-style: normal;
   font-weight: 700;
   font-size: 10px;

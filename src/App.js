@@ -23,7 +23,7 @@ function App() {
         <Route path="/list" element={<ListPage />} />
         <Route path="/create-review/:storeId/:name" element={<CreateReviewPage />} />
         <Route path="/detail/:storeId" element={<DetailPage />} />
-        <Route path="/review/:storeId" element={<ReviewPage />} />
+        <Route path="/review/:storeId/:name" element={<ReviewPage />} />
       </Route>
     </Routes>
   );

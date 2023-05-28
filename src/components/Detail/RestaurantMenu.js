@@ -130,6 +130,7 @@ const FoodList = styled.div`
     flex-wrap: wrap;
     width: 90%;
     justify-content: space-between;
+    margin-bottom: 100px;
 `;
 
 const FoodItem = styled.div`
