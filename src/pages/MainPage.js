@@ -1,6 +1,6 @@
 import styled from "styled-components";
 // asset
-import logo from "../assets/logo/logo.png";
+import mainlogo from "../assets/logo/mainlogo.png";
 // component
 import SearchBox from "../components/Search/SearchBox";
 import TopNavbar from "../components/Nav/TopNavbar";
@@ -15,7 +15,7 @@ const MainPage = () => {
   return (
     <Div>
       <TopNavbar noTitle />
-      <Logo src={logo} />
+      <Logo src={mainlogo} />
 
       <Container>
         <SearchBox />
@@ -42,6 +42,7 @@ const Div = styled.div`
   width: 100%;
   height: auto;
   padding-bottom: 32px;
+  background-color: #fdfff8;
 `;
 
 const Container = styled.div`

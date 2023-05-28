@@ -80,6 +80,7 @@ const IconBtn = styled.div`
     color: #151515;
 
     word-break: keep-all;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
   }
 
   .bottom-text {

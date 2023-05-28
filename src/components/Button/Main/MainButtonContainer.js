@@ -7,7 +7,7 @@ const MainButtonContainer = () => {
       {mainFoodsData.map(b => (
         <IconBtn>
           <div className="icon-box" key={b.id}>
-            <img src={b.img} />
+            <img src={b.img} className={b.class} />
           </div>
 
           <p>{b.food}</p>
@@ -36,6 +36,8 @@ const BtnContainer = styled.div`
   border: 4px solid #f4f4f4;
   filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.25));
   border-radius: 16px;
+
+  background-color: #fdfff8;
 `;
 
 const IconBtn = styled.div`
@@ -55,8 +57,6 @@ const IconBtn = styled.div`
   img {
     width: auto;
     height: auto;
-    max-width: 34px;
-    max-height: 34px;
   }
 
   p {
@@ -72,5 +72,59 @@ const IconBtn = styled.div`
     margin: 6px 0 0 0;
 
     word-break: keep-all;
+  }
+
+  .japan {
+    width: 40px;
+    height: 22px;
+  }
+
+  .mexican {
+    width: auto;
+    height: 24px;
+  }
+
+  .rice {
+    max-width: 34px;
+    max-height: 34px;
+  }
+
+  .pasta {
+    max-width: 34px;
+    max-height: 34px;
+  }
+  .chinafood {
+    max-width: 34px;
+    max-height: 34px;
+  }
+  .kimbap {
+    max-width: 34px;
+    max-height: 34px;
+  }
+  .hamburger {
+    max-width: 31px;
+    max-height: 31px;
+  }
+  .cake {
+    max-width: 34px;
+    max-height: 34px;
+    margin-bottom: 7px;
+  }
+  .coffee {
+    max-width: 34px;
+    max-height: 34px;
+  }
+  .soju {
+    max-width: 34px;
+    max-height: 34px;
+  }
+  .vegetable {
+    max-width: 32px;
+    max-height: 32px;
+  }
+
+  .noodle {
+    max-width: 32px;
+    max-height: 32px;
   }
 `;
