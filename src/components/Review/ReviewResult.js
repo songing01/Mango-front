@@ -63,52 +63,51 @@ const ReviewResult = ({ storeId }) => {
 
       {/* 반복할 리뷰 아이템 - barup component 사이 간격 추가*/}
 
-      <div style={{marginBottom: "100px"}}>
-        {reviewData.map((review, index) => {
-          return (
-            <ReviewItem key={index}>
-              <ReviewContent>
-                <div style={{ display: "flex", alignItems: "flex-start" }}>
-                  <img
-                    src={user}
-                    style={{ width: "36px", marginRight: "16px" }}
-                    alt="유저 이미지"
-                  />
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <ReviewMainText>{review.title}</ReviewMainText>
-                    <ReviewSubText>{review.content}</ReviewSubText>
-                  </div>
+      {reviewData.map((review, index) => {
+        return (
+          <ReviewItem key={index}>
+            <ReviewContent>
+              <div style={{ display: "flex", alignItems: "flex-start" }}>
+                <img
+                  src={user}
+                  style={{ width: "36px", marginRight: "16px" }}
+                  alt="유저 이미지"
+                />
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <ReviewMainText>{review.title}</ReviewMainText>
+                  <ReviewSubText>{review.content}</ReviewSubText>
                 </div>
-                <div style={{ display: "flex", alignItems: "flex-start" }}>
-                  {review.memberId === userId ? (
-                    <DeleteBtn
-                      onClick={() => {
-                        DeleteReview(review.reviewId, storeId, selectedOption);
-                      }}
-                    >
-                      삭제
-                    </DeleteBtn>
-                  ) : null}
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
+              </div>
+              <div style={{ display: "flex", alignItems: "flex-start" }}>
+                {review.memberId === userId ? (
+                  <DeleteBtn
+                    onClick={() => {
+                      DeleteReview(review.reviewId, storeId, selectedOption);
                     }}
                   >
-                    <FilledStar />
-                    <ReviewStarRateText>{review.star}</ReviewStarRateText>
-                  </div>
+                    삭제
+                  </DeleteBtn>
+                ) : null}
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <FilledStar />
+                  <ReviewStarRateText>{review.star}</ReviewStarRateText>
                 </div>
-              </ReviewContent>
-              {/* 이미지 필요하면 넣기, 없으면 생략 */}
-              {review.hasImage === true && review.imageUrl != null ? (
-                <ReviewImage src={review.imageUrl} alt={review.title} />
-              ) : null}
-            </ReviewItem>
-          );
-        })}
-      </div>
+              </div>
+            </ReviewContent>
+            {/* 이미지 필요하면 넣기, 없으면 생략 */}
+            {review.hasImage === true && review.imageUrl != null ? (
+              <ReviewImage src={review.imageUrl} alt={review.title} />
+            ) : null}
+          </ReviewItem>
+        );
+      })}
+      <div style={{marginBottom: "100px"}}></div>
     </>
   );
 };
