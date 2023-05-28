@@ -42,6 +42,7 @@ const Div = styled.div`
   width: 100%;
   height: auto;
   padding-bottom: 32px;
+  background-color: #fdfff8;
 `;
 
 const Container = styled.div`

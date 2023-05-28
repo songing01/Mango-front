@@ -36,6 +36,7 @@ const Div = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #fdfff8;
 `;
 
 const Logo = styled.img`
