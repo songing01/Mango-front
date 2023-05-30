@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import { ReactComponent as SearchIcon } from "../../assets/icon/listicon/search_vector.svg";
-import inputClearButton from "../../assets/icon/listicon/ic_inputClear.svg";
+import searchIcon from "../../assets/icon/listicon/ic_search.png";
+import inputClearButton from "../../assets/icon/listicon/ic_inputClear.png";
 
 const SearchBox = ({ keyword, setKeyword }) => {
   const handleChange = e => {
     setKeyword(e.target.value);
   };
+
   return (
     <SearchBlock>
-      <SearchIcon width={"24.14px"} height={"24px"} />
+      <Img src={searchIcon} width={"24.14px"} height={"24px"} />
       <Input
         onChange={handleChange}
         value={keyword}
@@ -20,7 +21,7 @@ const SearchBox = ({ keyword, setKeyword }) => {
 };
 
 export default SearchBox;
-
+const Img = styled.img``;
 const SearchBlock = styled.div`
   display: flex;
   flex-direction: row;

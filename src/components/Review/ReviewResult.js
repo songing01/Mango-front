@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import user from "../../assets/icon/topnavbar/ic_user.png";
-import { ReactComponent as FilledStar } from "../../assets/star_vector.svg";
+import filledStar from "../../assets/icon/listicon/ic_starscore.png";
 import { GetReviewAPI } from "../../api/review";
 import { GetUserInfo } from "../../api/user";
 import { DeleteMyReviewAPI } from "../../api/review";
@@ -95,7 +95,7 @@ const ReviewResult = ({ storeId }) => {
                     alignItems: "center",
                   }}
                 >
-                  <FilledStar />
+                  <Img src={filledStar} width={"20px"} height={"20px"} />
                   <ReviewStarRateText>{review.star}</ReviewStarRateText>
                 </div>
               </div>
@@ -107,7 +107,7 @@ const ReviewResult = ({ storeId }) => {
           </ReviewItem>
         );
       })}
-      <div style={{marginBottom: "100px"}}></div>
+      <div style={{ marginBottom: "100px" }}></div>
     </>
   );
 };
@@ -115,7 +115,7 @@ const ReviewResult = ({ storeId }) => {
 export default ReviewResult;
 
 // 리뷰 부분
-
+const Img = styled.img``;
 const ReviewTitle = styled.div`
   width: 100%;
   display: flex;
