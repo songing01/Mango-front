@@ -27,7 +27,6 @@ const SearchBlock = styled.div`
   align-items: center;
   padding: 8px 16px;
 
-  height: 40px;
   margin-left: 16px;
   margin-right: 16px;
   margin-bottom: 24px;
@@ -59,11 +58,15 @@ const Input = styled.input`
   &::placeholder {
     color: #a2a2a2;
   }
+
   &::-webkit-search-cancel-button {
     -webkit-appearance: none;
     width: 16px;
     height: 16px;
     background: url(${inputClearButton}) center center no-repeat;
     cursor: pointer;
+  }
+  &::-webkit-search-decoration {
+    -webkit-appearance: none;
   }
 `;

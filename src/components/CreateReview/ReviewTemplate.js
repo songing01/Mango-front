@@ -131,6 +131,7 @@ const Score = styled.div`
   align-items: center;
 `;
 const StarBox = styled.div`
+  display: flex;
   margin-bottom: 24px;
 `;
 const PhotoContainer = styled.div`
