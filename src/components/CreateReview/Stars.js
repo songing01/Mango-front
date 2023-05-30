@@ -21,19 +21,23 @@ const Stars = ({ setStar }) => {
     <>
       {array.map(el =>
         clicked[el] ? (
-          <FilledStar
-            width={"32px"}
-            height={"32px"}
-            key={el}
-            onClick={() => handleStarClick(el)}
-          />
+          <div style={{ padding: "10px" }}>
+            <FilledStar
+              width={"32px"}
+              height={"32px"}
+              key={el}
+              onClick={() => handleStarClick(el)}
+            />
+          </div>
         ) : (
-          <UnfilledStar
-            width={"32px"}
-            height={"32px"}
-            key={el}
-            onClick={() => handleStarClick(el)}
-          />
+          <div style={{ padding: "10px" }}>
+            <UnfilledStar
+              width={"32px"}
+              height={"32px"}
+              key={el}
+              onClick={() => handleStarClick(el)}
+            />
+          </div>
         ),
       )}
     </>
