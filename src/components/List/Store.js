@@ -82,6 +82,7 @@ const Store = ({
 
 const StoreBlock = styled.div`
   height: 120px;
+  min-width: 328px;
 
   background: #f4f4f4;
 
@@ -96,6 +97,7 @@ const StoreBlock = styled.div`
 const Image = styled.img`
   width: 92px;
   height: 92px;
+  min-width: 92px;
 
   background: #a2a2a2;
   border-radius: 20px;
@@ -107,9 +109,11 @@ const Image = styled.img`
 const Title = styled.div`
   height: 24px;
 
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 700;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
   font-size: 20px;
   line-height: 24px;
 
@@ -118,18 +122,17 @@ const Title = styled.div`
 const Location = styled.div`
   height: 12px;
 
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 14px;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 
   color: #a2a2a2;
 
   padding-top: 4px;
 `;
 const Info = styled.div`
-  height: 14px;
+  width: 184px;
 
   font-family: "Pretendard";
   font-style: normal;
@@ -140,17 +143,24 @@ const Info = styled.div`
   color: #151515;
   display: flex;
   flex-direction: column;
-
   flex-grow: 1;
 
-  margin-left: 18.61px;
+  margin-left: 18.92px;
   margin-top: 15px;
 `;
 const Recommendation = styled.div`
   padding-top: 8px;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 const AvgPrice = styled.div`
   padding-top: 8px;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `;
 
 const Rating = styled.div`
@@ -174,6 +184,7 @@ const Icons = styled.div`
   margin-top: 20px;
   margin-bottom: 12px;
   margin-right: 19px;
+
   justify-content: space-between;
 `;
 
