@@ -3,8 +3,8 @@ import styled from "styled-components";
 import Star from "../../assets/icon/detailbuttonbox/ic_star.png";
 import WatchReview from "../../assets/icon/detailbuttonbox/ic_message.png";
 import WriteReview from "../../assets/icon/detailbuttonbox/ic_write.png";
-import { ReactComponent as DibsT } from "../../assets/icon/listicon/heartfill_vector.svg";
-import { ReactComponent as DibsF } from "../../assets/icon/listicon/heart_vector.svg";
+import dibsT from "../../assets/icon/listicon/ic_filledHeart.png";
+import dibsF from "../../assets/icon/listicon/ic_unfilledHeart.png";
 import { PostMyHeartListAPI, DeleteMyHeartListAPI } from "../../api/heart";
 import { GetMyHeartListAPI } from "../../api/heart";
 import { useNavigate } from "react-router-dom";
@@ -146,9 +146,19 @@ const RestaurantInfo = ({
           <IconDesc>리뷰 쓰기</IconDesc>
         </Icon>
         {dibs ? (
-          <DibsT onClick={toggleDibs} width={"20px"} height={"18px"} style={{marginLeft: "auto", cursor: "pointer"}} />
+          <Img
+            src={dibsT}
+            onClick={toggleDibs}
+            width={"20px"}
+            height={"18px"}
+          />
         ) : (
-          <DibsF onClick={toggleDibs} width={"20px"} height={"18px"} style={{marginLeft: "auto", cursor: "pointer"}}/>
+          <Img
+            src={dibsF}
+            onClick={toggleDibs}
+            width={"20px"}
+            height={"18px"}
+          />
         )}
       </IconButtons>
 
@@ -182,7 +192,7 @@ const Map = styled.div`
     height: 300px;
   }
 `;
-
+const Img = styled.img``;
 const IconButtons = styled.div`
   width: 90%;
   display: flex;

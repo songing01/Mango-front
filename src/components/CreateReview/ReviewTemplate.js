@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { ReactComponent as CircleAdd } from "../../assets/icon/createreviewicon/icon _circle_add_.svg";
-import { ReactComponent as ReviewFinish } from "../../assets/icon/createreviewicon/review_finish.svg";
-import { ReactComponent as DeletePhotoButton } from "../../assets/icon/createreviewicon/ic_closeImage.svg";
+import circleAdd from "../../assets/icon/createreviewicon/icon _circle add_.png";
+import reviewFinish from "../../assets/icon/createreviewicon/review_finish.png";
+import deletePhotoButton from "../../assets/icon/createreviewicon/ic_closeImage.png";
 import Stars from "./Stars";
 import { useState } from "react";
 import { useRef } from "react";
@@ -85,7 +85,8 @@ const ReviewTemplate = ({ storeId, name }) => {
         </InputBox>
         <AddPhotoButton>
           <label htmlFor="file" style={style}>
-            <CircleAdd height={"16px"} width={"16px"} />
+            <Img src={circleAdd} height={"16px"} width={"16px"} />
+
             <PhotoText>사진 첨부하기</PhotoText>
           </label>
           <input
@@ -101,20 +102,36 @@ const ReviewTemplate = ({ storeId, name }) => {
         {imgShow && (
           <PhotoContainer>
             <Photo src={imgShow} />
-            <DeletePhotoButton
+            <Img
+              src={deletePhotoButton}
+              width={"20px"}
+              height={"20px"}
               onClick={deletePhoto}
               style={{ position: "absolute", top: "8px", left: "104px" }}
             />
           </PhotoContainer>
         )}
-        <ReviewFinish width={"100%"} onClick={postReview} />
+        <p className="imgContainer">
+          <Img
+            src={reviewFinish}
+            width={"124px"}
+            height={"40px"}
+            onClick={postReview}
+          />
+        </p>
       </Wrapper>
     </div>
   );
 };
+const Img = styled.img``;
 
 const Wrapper = styled.div`
   margin: 40px 16px 16px;
+  .imgContainer {
+    margin-top: 48px;
+    display: flex;
+    justify-content: center;
+  }
 `;
 const InputBox = styled.div`
   height: 240px;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { ReactComponent as DibsT } from "../../assets/icon/listicon/heartfill_vector.svg";
-import { ReactComponent as DibsF } from "../../assets/icon/listicon/heart_vector.svg";
-import { ReactComponent as Star } from "../../assets/icon/listicon/star_vector.svg";
+import dibsT from "../../assets/icon/listicon/ic_filledHeart.png";
+import dibsF from "../../assets/icon/listicon/ic_unfilledHeart.png";
+import star from "../../assets/icon/listicon/ic_starscore.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { PostMyHeartListAPI, DeleteMyHeartListAPI } from "../../api/heart";
@@ -66,12 +66,22 @@ const Store = ({
 
         <Icons>
           {dibs ? (
-            <DibsT onClick={toggleDibs} width={"20px"} height={"18px"} />
+            <Img
+              src={dibsT}
+              onClick={toggleDibs}
+              width={"20px"}
+              height={"18px"}
+            />
           ) : (
-            <DibsF onClick={toggleDibs} width={"20px"} height={"18px"} />
+            <Img
+              src={dibsF}
+              onClick={toggleDibs}
+              width={"20px"}
+              height={"18px"}
+            />
           )}
           <Rating>
-            <Star />
+            <Img src={star} width={"20px"} height={"20px"} />
             {starAverage}
           </Rating>
         </Icons>
@@ -79,7 +89,7 @@ const Store = ({
     </div>
   );
 };
-
+const Img = styled.img``;
 const StoreBlock = styled.div`
   height: 120px;
   min-width: 328px;

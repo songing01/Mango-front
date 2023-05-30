@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { ReactComponent as FilledStar } from "../../assets/icon/createreviewicon/star_vector.svg";
-import { ReactComponent as UnfilledStar } from "../../assets/icon/createreviewicon/ic_starscore.svg";
+import filledStar from "../../assets/icon/createreviewicon/filled_starscore.png";
+import unfilledStar from "../../assets/icon/createreviewicon/unfilled_starscore.png";
 const Stars = ({ setStar }) => {
   const [clicked, setClicked] = useState([false, false, false, false, false]);
 
@@ -22,7 +22,8 @@ const Stars = ({ setStar }) => {
       {array.map(el =>
         clicked[el] ? (
           <div style={{ padding: "10px" }}>
-            <FilledStar
+            <img
+              src={filledStar}
               width={"32px"}
               height={"32px"}
               key={el}
@@ -31,7 +32,8 @@ const Stars = ({ setStar }) => {
           </div>
         ) : (
           <div style={{ padding: "10px" }}>
-            <UnfilledStar
+            <img
+              src={unfilledStar}
               width={"32px"}
               height={"32px"}
               key={el}
