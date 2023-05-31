@@ -146,14 +146,14 @@ const RestaurantInfo = ({
           <IconDesc>리뷰 쓰기</IconDesc>
         </Icon>
         {dibs ? (
-          <Img
+          <HeartIcon
             src={dibsT}
             onClick={toggleDibs}
             width={"20px"}
             height={"18px"}
           />
         ) : (
-          <Img
+          <HeartIcon
             src={dibsF}
             onClick={toggleDibs}
             width={"20px"}
@@ -192,7 +192,11 @@ const Map = styled.div`
     height: 300px;
   }
 `;
-const Img = styled.img``;
+
+const HeartIcon = styled.img`
+  margin-left: auto;
+`;
+
 const IconButtons = styled.div`
   width: 90%;
   display: flex;
@@ -211,6 +215,7 @@ const Icon = styled.div`
 
 const IconImage = styled.img`
   margin-bottom: 4px;
+  width: 22px;
 `;
 
 const IconDesc = styled.span`
@@ -227,7 +232,7 @@ const InfoList = styled.div`
   margin-top: 14px;
 
   /* lightgrey */
-
+  background-color: #FDFFF8;
   border: 4px solid #f4f4f4;
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
   border-radius: 8px;
