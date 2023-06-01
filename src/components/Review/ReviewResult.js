@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import user from "../../assets/icon/topnavbar/ic_user.png";
 import filledStar from "../../assets/icon/listicon/ic_starscore.png";
-import downIcon from "../../assets/icon/reviewbuttonbox/ic_down.png"
+import downIcon from "../../assets/icon/reviewbuttonbox/ic_down.png";
 import { GetReviewAPI } from "../../api/review";
 import { GetUserInfo } from "../../api/user";
 import { DeleteMyReviewAPI } from "../../api/review";
@@ -17,10 +17,6 @@ const ReviewResult = ({ storeId }) => {
 
   // 유저 아이디
   const [userId, setUserId] = useState(0);
-
-  const handleOptionChange = event => {
-    setSelectedOption(event.target.value);
-  };
 
   // 클릭 시 dropdown list가 보이도록
   const toggleDropdown = () => {
@@ -65,6 +61,7 @@ const ReviewResult = ({ storeId }) => {
   // 리뷰 데이터 삭제 함수
   const DeleteReview = async (reviewId, storeId, selectedOption) => {
     await DeleteMyReviewAPI(reviewId);
+    window.location.reload();
     await updateReviewData();
   };
 
@@ -90,7 +87,7 @@ const ReviewResult = ({ storeId }) => {
             color={isOpen === true ? "#F4F4F4" : "#15D0F9"}
           >
             {selectedOption === "LATEST" ? "최신순" : "평점순"}
-            <DownIcon src={downIcon} alt="아래 화살표 아이콘"/>
+            <DownIcon src={downIcon} alt="아래 화살표 아이콘" />
           </SortDropDown>
           {isOpen === true ? (
             selectedOption === "LATEST" ? (
@@ -239,8 +236,9 @@ const ReviewSubText = styled.p`
   line-height: 14px;
 
   color: #a2a2a2;
-  width: 90%;
-  word-break: keep-all;
+  /* width: 90%; */
+  /* word-break: keep-all; */
+  line-break: anywhere;
 `;
 
 const ReviewStarRateText = styled.span`
