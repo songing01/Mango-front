@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import circleAdd from "../../assets/icon/createreviewicon/icon _circle add_.png";
-import reviewFinish from "../../assets/icon/createreviewicon/review_finish.png";
+
 import deletePhotoButton from "../../assets/icon/createreviewicon/ic_closeImage.png";
 import Stars from "./Stars";
 import { useState } from "react";
@@ -112,12 +112,7 @@ const ReviewTemplate = ({ storeId, name }) => {
           </PhotoContainer>
         )}
         <p className="imgContainer">
-          <Img
-            src={reviewFinish}
-            width={"124px"}
-            height={"40px"}
-            onClick={postReview}
-          />
+          <CompleteButton onClick={postReview}>작성완료</CompleteButton>
         </p>
       </Wrapper>
     </div>
@@ -225,6 +220,30 @@ const Photo = styled.img`
   border-radius: 20px;
   width: 132px;
   height: 132px;
+`;
+const CompleteButton = styled.button`
+  width: 124px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  /* special */
+
+  background: #15d0f9;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25);
+  border-radius: 32px;
+  border: none;
+
+  /* bold12 */
+
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+
+  color: #000000;
 `;
 
 export default ReviewTemplate;
