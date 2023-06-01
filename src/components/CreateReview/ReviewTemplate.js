@@ -196,6 +196,13 @@ const Detail = styled.textarea`
   &:focus {
     outline: none;
   }
+  /* enlarge by 16/12 = 133.33% */
+  font-size: 16px;
+  line-height: 18.6662px;
+
+  /* scale down by 12/16 = 75% */
+  transform: scale(0.75);
+  transform-origin: left top;
 `;
 const AddPhotoButton = styled.div`
   margin-top: 16px;
