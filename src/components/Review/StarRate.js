@@ -74,7 +74,7 @@ export default StarRate;
 const Img = styled.img``;
 // 별점 부분
 const StarRateInfo = styled.div`
-  width: 100%;
+  width: 90%;
   height: 120px;
   background: #f4f4f4;
   border-radius: 32px;

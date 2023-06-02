@@ -167,7 +167,7 @@ export default ReviewResult;
 // 리뷰 부분
 const Img = styled.img``;
 const ReviewTitle = styled.div`
-  width: 100%;
+  width: 90%;
   display: flex;
   justify-content: space-between;
   /* align-items: center; */
@@ -210,7 +210,7 @@ const DownIcon = styled.img`
 `;
 
 const ReviewItem = styled.div`
-  width: 100%;
+  width: 90%;
   background: #f4f4f4;
   border-radius: 32px;
   margin-top: 12px;
