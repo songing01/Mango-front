@@ -28,7 +28,7 @@ EFUB 3기 리드 개발자 토이 프로젝트 2팀 <br/>
     </tr>
     <tr width="100%">
         <td  align="center"><span>카카오 소셜 로그인</span></br><span>Main Page</span></br><span>Sidebar</span></td>
-      <td  align="center"><p>~</p></td>
+      <td  align="center"><span>카카오 지도</span></br><span>Detail Page</span></br><span>Review Page</span></td>
       <td  align="center"><p>~</p></td>
    </tr>
 </table>
