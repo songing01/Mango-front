@@ -25,7 +25,7 @@ EFUB 3기 리드 개발자 토이 프로젝트 2팀 <br/>
     <tr width="100%">
         <td align="center"><a href= "https://github.com/dy6578ekdbs">정다윤</a></td>
         <td  align="center"><a href= "">김민정</a></td>
-        <td  align="center"><a href= "https://github.com/songing01">송지민</a></td>  
+        <td  align="center"><a href= "https://github.com/songing01https://github.com/songing01">송지민</a></td>  
     </tr>
     <tr width="100%">
         <td  align="center"><span>카카오 소셜 로그인</span></br><span>Main Page</span></br><span>Sidebar</span></td>
